@@ -48,7 +48,8 @@ function Perfil() {
 				}
 				Alert.error(error.response.data.message);
 			});
-	}, [push, usuario]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const handleSenha = () => {
 		if (senhaAtual === "" || senhaNova === "" || senhaConfirmar === "") {
