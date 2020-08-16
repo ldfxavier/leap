@@ -58,7 +58,7 @@ const Signup = () => {
 	return (
 		<Container>
 			<div>
-				<img className="logo" src={logo} />
+				<img className="logo" alt="logo" src={logo} />
 			</div>
 			<Form>
 				<FormGroup>

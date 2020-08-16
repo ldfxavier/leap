@@ -8,10 +8,11 @@ function Routes(props) {
 
 	useEffect(() => {
 		const usuario = JSON.parse(localStorage.getItem("@Usuario"));
+		// eslint-disable-next-line react/prop-types
 		if (props.isPrivate && !usuario) {
 			push("login");
 		}
-	}, []);
+	}, [props, push]);
 
 	return (
 		<div>

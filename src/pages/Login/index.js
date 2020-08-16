@@ -57,7 +57,7 @@ const Login = () => {
 	return (
 		<Container fluid>
 			<div>
-				<img className="logo" src={logo} />
+				<img className="logo" alt="logo" src={logo} />
 			</div>
 			<Form>
 				<FormGroup>

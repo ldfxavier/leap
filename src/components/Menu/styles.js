@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { Nav } from "rsuite";
-
 import colors from "~/styles/colors";
 
 export const MenuBg = styled.div`

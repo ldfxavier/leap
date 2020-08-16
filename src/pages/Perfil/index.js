@@ -14,7 +14,6 @@ import {
 	Avatar,
 	Alert,
 } from "rsuite";
-import colors from "~/styles/colors";
 import api from "~/services/api";
 
 function Perfil() {
@@ -49,7 +48,7 @@ function Perfil() {
 				}
 				Alert.error(error.response.data.message);
 			});
-	}, []);
+	}, [push, usuario]);
 
 	const handleSenha = () => {
 		if (senhaAtual === "" || senhaNova === "" || senhaConfirmar === "") {

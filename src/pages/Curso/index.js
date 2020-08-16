@@ -5,7 +5,7 @@ import api from "~/services/api";
 
 import parse from "html-react-parser";
 
-import { Link, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 
 import {
 	Container,
@@ -23,7 +23,6 @@ const Curso = (props) => {
 
 	const { params } = useRouteMatch();
 
-	const [dadosCurso, setDadosCurso] = useState(false);
 	const [index, setIndex] = useState(0);
 	const [aulas, setAulas] = useState(0);
 
@@ -37,7 +36,6 @@ const Curso = (props) => {
 				},
 			})
 			.then((response) => {
-				setDadosCurso(response.data);
 				setAulas(response.data.aulas);
 			})
 			.catch((error) => {
@@ -50,6 +48,7 @@ const Curso = (props) => {
 
 	useEffect(() => {
 		curso();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const renderTimeLine = () => {
@@ -81,6 +80,7 @@ const Curso = (props) => {
 					<Video>
 						<VideoContainer>
 							<iframe
+								title={`Aula ${index + 1}`}
 								src={aulas[index].video}
 								frameborder="0"
 								allow="autoplay; fullscreen"

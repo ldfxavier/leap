@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import colors from "~/styles/colors";
 
-import { Modal, Button } from "rsuite";
+import { Modal } from "rsuite";
 
 export const Container = styled.div`
 	display: flex;

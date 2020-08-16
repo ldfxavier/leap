@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 import colors from "~/styles/colors";
 
-import { Button } from "rsuite";
-
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;

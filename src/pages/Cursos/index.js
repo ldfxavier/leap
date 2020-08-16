@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FormEvent } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import api from "~/services/api";
@@ -32,11 +32,10 @@ const responsive = {
 const Cursos = () => {
 	const { push } = useHistory();
 
-	const [deviceType, setDeviceType] = useState("web");
+	const [deviceType] = useState("web");
 
 	const usuario = JSON.parse(localStorage.getItem("@Usuario"));
 
-	const [isMoving, setIsMoving] = useState(false);
 	const [categorias, setCategorias] = useState(false);
 	const [resultadoBusca, setResultadoBusca] = useState(false);
 	const [texto, setTexto] = useState("");
@@ -61,6 +60,7 @@ const Cursos = () => {
 
 	useEffect(() => {
 		cursos();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	async function busca() {
@@ -90,8 +90,6 @@ const Cursos = () => {
 						responsive={responsive}
 						ssr
 						infinite={false}
-						beforeChange={() => setIsMoving(true)}
-						afterChange={() => setIsMoving(false)}
 						containerClass="first-carousel-container container"
 						deviceType={deviceType}
 					>
@@ -315,8 +313,6 @@ const Cursos = () => {
 					responsive={responsive}
 					ssr
 					infinite={false}
-					beforeChange={() => setIsMoving(true)}
-					afterChange={() => setIsMoving(false)}
 					containerClass="first-carousel-container container"
 					deviceType={deviceType}
 				>

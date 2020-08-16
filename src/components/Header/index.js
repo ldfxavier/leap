@@ -19,7 +19,7 @@ const Header = () => {
 	return (
 		<Container>
 			<div>
-				<img className="logo" src={logo} />
+				<img className="logo" alt="logo" src={logo} />
 				<Link to="" onClick={() => goBack()}>
 					<Icon icon="chevron-left" />
 					<strong>Voltar</strong>
