@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Avatar } from "rsuite";
 
@@ -9,7 +9,6 @@ import logo from "~/assets/images/logo.png";
 
 const Header = () => {
 	const [usuario, setUsuario] = useState();
-	const { goBack } = useHistory();
 
 	useEffect(() => {
 		const dados = localStorage.getItem("@Usuario");
