@@ -12,7 +12,7 @@ export const Container = styled.div`
 	padding: 10px;
 	color: ${colors.secundary};
 
-	div {
+	div.menu {
 		img.logo {
 			height: 30px;
 			margin-right: 30px;
@@ -20,6 +20,11 @@ export const Container = styled.div`
 		a {
 			text-decoration: none;
 			color: ${colors.secundary};
+			margin-right: 20px;
+
+			&:hover {
+				color: ${colors.primary};
+			}
 
 			i {
 				margin-right: 10px;
@@ -36,6 +41,9 @@ export const Container = styled.div`
 		}
 		p {
 			font-size: 14px;
+		}
+		a div {
+			border: solid 2px ${colors.primary};
 		}
 	}
 `;

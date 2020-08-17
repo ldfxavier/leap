@@ -1,0 +1,19 @@
+@baseUrl = https://api.leap.art.br/api
+
+# @name UserLogin
+# Login do usuário
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+	"email": "ldfxavier@gmail.com",
+	"password": 1
+}
+
+###
+
+# @name GetDataUser
+# Pegar informações do usuário logado
+GET {{baseUrl}}/auth/usuario
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLmxlYXAuYXJ0LmJyXC9hcGlcL2F1dGhcL2xvZ2luIiwiaWF0IjoxNTk3NTg4NjY5LCJleHAiOjE1OTkzOTIyNjksIm5iZiI6MTU5NzU4ODY2OSwianRpIjoiQUphM21tekZhSXdQQjFmMCIsInN1YiI6MSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.4i4y0cV4iPQrKDpP_h8-qIAKd4Zb2REqDtf_ZhNzxaw

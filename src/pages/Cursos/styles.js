@@ -28,7 +28,6 @@ export const Form = styled.form`
 		height: 40px;
 		padding: 0 24px;
 		border: 0;
-		color: ${colors.text};
 		background-color: ${shade(0.2, colors.background)};
 
 		&::placeholder {

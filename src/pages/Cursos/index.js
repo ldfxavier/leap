@@ -48,10 +48,10 @@ const Cursos = () => {
 				},
 			})
 			.then((response) => {
-				setCategorias(response.data);
+				setCategorias(response?.data);
 			})
 			.catch((error) => {
-				if (error.response.data.error === "token") {
+				if (error.response?.data?.error === "token") {
 					push("/login");
 				}
 				console.log(error.response);
@@ -71,10 +71,10 @@ const Cursos = () => {
 				},
 			})
 			.then((response) => {
-				setResultadoBusca(response.data);
+				setResultadoBusca(response?.data);
 			})
 			.catch((error) => {
-				if (error.response.data.error === "token") {
+				if (error.response?.data?.error === "token") {
 					push("/login");
 				}
 				setResultadoBusca(false);

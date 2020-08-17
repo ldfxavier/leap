@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 
-import { Icon, Avatar, Badge } from "rsuite";
+import { Avatar } from "rsuite";
 
 import { Container } from "./styles";
 
@@ -18,11 +18,13 @@ const Header = () => {
 
 	return (
 		<Container>
-			<div>
+			<div className="menu">
 				<img className="logo" alt="logo" src={logo} />
-				<Link to="" onClick={() => goBack()}>
-					<Icon icon="chevron-left" />
-					<strong>Voltar</strong>
+				<Link to="/cursos">
+					<strong>Cursos</strong>
+				</Link>
+				<Link to="/login">
+					<strong>Sair</strong>
 				</Link>
 			</div>
 			<div className="perfil">
@@ -30,16 +32,16 @@ const Header = () => {
 					<strong>{usuario?.dados.nome}</strong>
 					<p>{usuario?.dados.email}</p>
 				</div>
-				<Badge content="20">
-					<Link to="/perfil">
-						<Avatar
-							circle
-							size="md"
-							src="https://avatars2.githubusercontent.com/u/34281331?v=4"
-							alt="RS"
-						/>
-					</Link>
-				</Badge>
+				{/* <Badge content="20"> */}
+				<Link to="/perfil">
+					<Avatar
+						circle
+						size="lg"
+						src="https://avatars2.githubusercontent.com/u/34281331?v=4"
+						alt="RS"
+					/>
+				</Link>
+				{/* </Badge> */}
 			</div>
 		</Container>
 	);
