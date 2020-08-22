@@ -58,5 +58,8 @@ export const Container = styled.div`
 			align-items: center;
 			font-size: 56px;
 		}
+		img {
+			object-fit: cover;
+		}
 	}
 `;

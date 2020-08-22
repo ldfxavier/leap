@@ -58,6 +58,12 @@ export const Menu = styled.div`
 		border: solid 2px ${colors.primary};
 	}
 
+	.rs-uploader-trigger-btn{
+		img{
+			object-fit: cover;
+		}
+	}
+
 	.rs-icon-size-5x,
 	.rs-icon-size-5x.rs-icon {
 		font-size: 150px;
