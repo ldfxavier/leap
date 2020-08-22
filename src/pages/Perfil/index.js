@@ -146,7 +146,7 @@ function Perfil() {
 							fileListVisible={false}
 							listType="picture"
 							name="avatar"
-							action="http://localhost/leap_painel/leap/public/api/usuario/avatar"
+							action="https://api.leap.art.br/api/api/usuario/avatar"
 							headers={{
 								Authorization: `Bearer ${usuario?.access_token}`,
 							}}
