@@ -8,10 +8,17 @@ import InputMask from "react-input-mask";
 
 export const Container = styled.div`
 	display: flex;
-	margin: 0 auto;
+	-webkit-box-pack: center;
 	justify-content: center;
-	padding: 20px;
-	max-width: 700px;
+`;
+
+export const Body = styled.div`
+	width: 100%;
+	max-width: 1180px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 48px 30px 345.094px;
 
 	h1 {
 		height: 18px;
@@ -24,27 +31,35 @@ export const Container = styled.div`
 `;
 
 export const Menu = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: ${shade(0.2, colors.background)};
 	margin-right: 20px;
-	padding: 20px;
-	height: 200px;
-	border-radius: 5px;
-	width: 200px;
 	text-align: center;
+	padding: 20px;
+	background-color: ${shade(0.2, colors.background)};
+	border-radius: 5px;
+	width: 31.425%;
 
-	.menuPerfil {
-		max-width: 200px;
-		align-items: center;
+	.rs-uploader-picture .rs-uploader-trigger-btn {
+		width: 150px;
+		height: 150px;
 	}
 
-	.rs-avatar {
-		margin-bottom: 20px;
+	.rs-uploader-picture .rs-uploader-trigger-btn {
+		border-radius: 50%;
+		border: solid 2px ${colors.primary};
 	}
-	p {
-		margin-top: 5px;
+
+	.rs-icon-size-5x,
+	.rs-icon-size-5x.rs-icon {
+		font-size: 150px;
+		height: 0px;
+		margin-left: -2px;
+		margin-top: -17px;
+		/* color: ${colors.secundary};
+		background-color: ${shade(0.2, colors.background)}; */
+	}
+
+	h1 {
+		margin-top: 20px;
 	}
 `;
 

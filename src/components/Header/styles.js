@@ -45,5 +45,18 @@ export const Container = styled.div`
 		a div {
 			border: solid 2px ${colors.primary};
 		}
+
+		i {
+			display: flex;
+			border: solid 2px ${colors.primary};
+			border-radius: 50%;
+			height: 60px;
+			width: 60px;
+			color: ${colors.secundary};
+			text-align: center;
+			justify-content: center;
+			align-items: center;
+			font-size: 56px;
+		}
 	}
 `;

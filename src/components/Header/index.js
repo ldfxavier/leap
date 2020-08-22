@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { Avatar } from "rsuite";
+import { Avatar, Icon } from "rsuite";
 
 import { Container } from "./styles";
 
@@ -33,12 +33,16 @@ const Header = () => {
 				</div>
 				{/* <Badge content="20"> */}
 				<Link to="/perfil">
-					<Avatar
-						circle
-						size="lg"
-						src="https://avatars2.githubusercontent.com/u/34281331?v=4"
-						alt="RS"
-					/>
+					{usuario?.dados?.avatar ? (
+						<Avatar
+							circle
+							size="lg"
+							src={usuario?.dados?.avatar}
+							alt="RS"
+						/>
+					) : (
+						<Icon icon="user-circle" size="3x" />
+					)}
 				</Link>
 				{/* </Badge> */}
 			</div>

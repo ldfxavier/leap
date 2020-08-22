@@ -61,4 +61,17 @@ export default createGlobalStyle`
 			color: #fff;
 		}
 	}
+
+	button.btn_small {
+		background-color: ${colors.primary};
+		padding: 10px 20px;
+		color: #fff;
+		border-radius: 5px;
+		&:hover {
+			background-color: ${shade(0.2, colors.primary)};
+		}
+		&:active {
+			color: #fff;
+		}
+	}
 `;
