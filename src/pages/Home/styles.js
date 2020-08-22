@@ -169,7 +169,7 @@ export const Planos = styled.div`
 		flex-direction: column;
 		padding: 20px;
 		background: #fff;
-		margin-right: 20px;
+		margin: 1em;
 		box-shadow: 0 0 10px 0 rgba(120, 135, 182, 0.1);
 
 		@media only screen and (max-device-width: 750px) {

@@ -19,7 +19,7 @@ export const Body = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
-	padding: 48px 30px 345.094px;
+	margin-top: 20px;
 
 	@media only screen and (max-device-width: 750px) {
 		flex-direction: column;
