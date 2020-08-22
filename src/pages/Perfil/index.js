@@ -63,8 +63,6 @@ function Perfil() {
 				setTelefone(data.telefone);
 				setEmail(data.email);
 				setAvatar(data.avatar);
-
-				console.log(data);
 			})
 			.catch((error) => {
 				if (error.response.data.error === "token") {
@@ -146,7 +144,7 @@ function Perfil() {
 							fileListVisible={false}
 							listType="picture"
 							name="avatar"
-							action="https://api.leap.art.br/api/api/usuario/avatar"
+							action="https://api.leap.art.br/api/usuario/avatar"
 							headers={{
 								Authorization: `Bearer ${usuario?.access_token}`,
 							}}
