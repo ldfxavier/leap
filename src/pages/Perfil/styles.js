@@ -10,6 +10,7 @@ export const Container = styled.div`
 	display: flex;
 	-webkit-box-pack: center;
 	justify-content: center;
+	width: 100%;
 `;
 
 export const Body = styled.div`
@@ -19,6 +20,10 @@ export const Body = styled.div`
 	justify-content: center;
 	align-items: flex-start;
 	padding: 48px 30px 345.094px;
+
+	@media only screen and (max-device-width: 750px) {
+		flex-direction: column;
+	}
 
 	h1 {
 		height: 18px;
@@ -37,6 +42,11 @@ export const Menu = styled.div`
 	background-color: ${shade(0.2, colors.background)};
 	border-radius: 5px;
 	width: 31.425%;
+
+	@media only screen and (max-device-width: 750px) {
+		width: 100%;
+		margin-bottom: 20px;
+	}
 
 	.rs-uploader-picture .rs-uploader-trigger-btn {
 		width: 150px;
@@ -70,10 +80,18 @@ export const Bloco = styled.div`
 	padding: 20px;
 	margin-bottom: 20px;
 	border-radius: 5px;
+
+	@media only screen and (max-device-width: 750px) {
+		width: 100%;
+	}
 `;
 
 export const Main = styled.div`
 	flex: 1 1 0%;
+
+	@media only screen and (max-device-width: 750px) {
+		width: 100%;
+	}
 `;
 
 export const Input = styled(InputMask)`

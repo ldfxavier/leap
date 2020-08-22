@@ -15,6 +15,11 @@ export const Form = styled.form`
 	width: 700px;
 	display: flex;
 
+	@media only screen and (max-device-width: 750px) {
+		width: 100%;
+		padding: 0 20px;
+	}
+
 	select {
 		height: 40px;
 		padding: 0 24px;

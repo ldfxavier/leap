@@ -59,6 +59,10 @@ export const Cursos = styled.div`
 				height 0.25s ease-out 0.75s;
 		}
 	}
+
+	@media only screen and (max-device-width: 900px) {
+		flex-direction: column;
+	}
 `;
 
 export const CursoCard = styled.div`
@@ -70,30 +74,21 @@ export const CursoCard = styled.div`
 	margin: 1em;
 	padding: 1em 2em;
 	align-items: center;
-	
+
 	font-size: inherit;
 	font-weight: 700;
-	
+
 	position: relative;
 	vertical-align: middle;
 
 	&::before,
 	&::after {
 		box-sizing: inherit;
-		content: '';
+		content: "";
 		position: absolute;
 		width: 100%;
 		height: 100%;
 	}
-
-	/* &:last-child {
-		margin-right: 0px;
-	}
-	&:hover {
-		border-width: 2px;
-		border-style: solid;
-		border-color: ${(props) => props.cor};
-	} */
 `;
 
 export const LogoBg = styled.div`
@@ -165,11 +160,22 @@ export const Planos = styled.div`
 	text-align: center;
 	padding: 20px;
 
+	@media only screen and (max-device-width: 750px) {
+		flex-direction: column;
+	}
+
 	div.card {
+		display: flex;
+		flex-direction: column;
 		padding: 20px;
 		background: #fff;
 		margin-right: 20px;
 		box-shadow: 0 0 10px 0 rgba(120, 135, 182, 0.1);
+
+		@media only screen and (max-device-width: 750px) {
+			margin-bottom: 20px;
+			width: 100%;
+		}
 	}
 
 	h1 {
@@ -191,7 +197,6 @@ export const Planos = styled.div`
 		flex-direction: column;
 		list-style: none;
 		text-align: start;
-		min-width: 300px;
 		margin-bottom: 20px;
 
 		li {
@@ -223,6 +228,13 @@ export const Detalhes = styled.div`
 		flex-direction: row;
 		margin-bottom: 50px;
 		margin-top: 50px;
+
+		@media only screen and (max-device-width: 750px) {
+			flex-direction: column;
+			margin-bottom: 0px;
+			margin-top: 0px;
+		}
+
 		div.card {
 			margin-right: 100px;
 			max-width: 300px;
@@ -230,6 +242,10 @@ export const Detalhes = styled.div`
 				margin-right: 0px;
 			}
 			h1 {
+			}
+
+			@media only screen and (max-device-width: 750px) {
+				margin-bottom: 50px;
 			}
 		}
 	}

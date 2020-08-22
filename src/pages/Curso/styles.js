@@ -12,6 +12,10 @@ export const Container = styled.div`
 	margin-top: 20px;
 	margin-bottom: 20px;
 
+	@media only screen and (max-device-width: 750px) {
+		padding: 20px;
+	}
+
 	h1 {
 		font-size: 20px;
 		color: ${colors.secundary};
@@ -22,6 +26,10 @@ export const Container = styled.div`
 export const Video = styled.div`
 	display: flex;
 	position: relative;
+
+	@media only screen and (max-device-width: 750px) {
+		flex-direction: column;
+	}
 
 	div {
 		flex: 1 1 0%;
@@ -56,6 +64,12 @@ export const TimeLineVideo = styled(Timeline)`
 	background-color: ${shade(0.2, colors.background)};
 	padding: 20px;
 	border-radius: 5px;
+
+	@media only screen and (max-device-width: 750px) {
+		margin-top: 20px;
+		margin-left: 0px;
+		width: 100%;
+	}
 `;
 
 export const Topico = styled.p`
