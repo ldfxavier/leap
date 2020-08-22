@@ -5,6 +5,8 @@ import { Icon } from "rsuite";
 import colors from "~/styles/colors";
 
 export const Container = styled.div`
+	display: flex;
+	justify-content: flex-end;
 	background-color: ${colors.background};
 	border-top-width: 2px;
 	border-bottom-width: 0px;
@@ -16,10 +18,6 @@ export const Container = styled.div`
 `;
 
 export const Box = styled.div``;
-
-export const Texto = styled.p`
-	color: ${colors.text};
-`;
 
 export const IconTexto = styled(Icon)`
 	margin-right: 10px;

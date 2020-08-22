@@ -1,30 +1,18 @@
 import React from "react";
 
-import { Container, Box, Texto, IconTexto } from "./styles";
+import { Container, Box, IconTexto } from "./styles";
 
 const Footer = () => {
-  return (
-    <Container>
-      <Box>
-        <Texto>
-          <IconTexto icon="envelope" />
-          mail@email.com
-        </Texto>
-        <Texto>
-          <IconTexto icon="whatsapp" />
-          61 9 9999-9999
-        </Texto>
-        <Texto>
-          <IconTexto icon="facebook" />
-          Facebook
-        </Texto>
-        <Texto>
-          <IconTexto icon="instagram" />
-          Instagram
-        </Texto>
-      </Box>
-    </Container>
-  );
+	return (
+		<Container>
+			<Box>
+				<IconTexto icon="envelope" size="lg" />
+				<IconTexto icon="whatsapp" size="lg" />
+				<IconTexto icon="facebook" size="lg" />
+				<IconTexto icon="instagram" size="lg" />
+			</Box>
+		</Container>
+	);
 };
 
 export default Footer;

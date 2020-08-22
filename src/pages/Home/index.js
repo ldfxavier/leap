@@ -2,8 +2,6 @@ import React, { useState } from "react";
 
 import { Banner, Footer, Menu } from "../../components";
 
-import colors from "~/styles/colors";
-
 import {
 	Container,
 	Cursos,
@@ -17,6 +15,8 @@ import {
 	SobreContainer,
 	Sobre,
 	TituloSobre,
+	Planos,
+	Detalhes,
 	ModalCursos as Modal,
 } from "./styles";
 
@@ -33,15 +33,15 @@ const Home = () => {
 			<Banner />
 			<Cursos>
 				<CursoCard
-					cor={colors.maya}
+					className="draw meet"
 					lg={8}
 					onClick={() => setCursos(true)}
 				>
-					<LogoBg cor={colors.maya}>
+					<LogoBg>
 						<Logo src={Maya} />
 					</LogoBg>
 					<Titulo>START</Titulo>
-					<SubTituloMaya cor={colors.maya}>
+					<SubTituloMaya>
 						Torne-se um profissional em Maya
 					</SubTituloMaya>
 					<Texto>
@@ -68,17 +68,48 @@ const Home = () => {
 				</CursoCard>
 
 				<CursoCard
-					cor={colors.primary}
+					className="draw meet"
 					lg={8}
 					onClick={() => setCursoFree(true)}
 				>
-					<LogoBg cor={colors.primary}>
+					<LogoBg>
 						<Logo src={Zbrush} />
 					</LogoBg>
 					<Titulo>Cursos avançados</Titulo>
-					<SubTituloMaya cor={colors.primary}>
-						Seja o mestre da modelagem 3D
-					</SubTituloMaya>
+					<SubTituloMaya>Seja o mestre da modelagem 3D</SubTituloMaya>
+					<Texto>
+						Software de animação computadorizada, modelagem,
+						simulação e renderização 3D
+					</Texto>
+					<Lista>
+						<ul>
+							<li>
+								Dê vida a personagens realistas com ferramentas
+								de animação interativas.
+							</li>
+							<li>
+								Modele objetos e cenas 3D com ferramentas
+								intuitivas de modelagem de imagens no software
+								Maya®.
+							</li>
+							<li>
+								Crie efeitos realistas, de explosões à simulação
+								de tecidos.
+							</li>
+						</ul>
+					</Lista>
+				</CursoCard>
+
+				<CursoCard
+					className="draw meet"
+					lg={8}
+					onClick={() => setCursoFree(true)}
+				>
+					<LogoBg>
+						<Logo src={Zbrush} />
+					</LogoBg>
+					<Titulo>Cursos avançados</Titulo>
+					<SubTituloMaya>Seja o mestre da modelagem 3D</SubTituloMaya>
 					<Texto>
 						Software de animação computadorizada, modelagem,
 						simulação e renderização 3D
@@ -102,6 +133,85 @@ const Home = () => {
 					</Lista>
 				</CursoCard>
 			</Cursos>
+			<Planos>
+				<div className="card">
+					<h1>Mensal</h1>
+					<h2>
+						<strong>R$90</strong>/mês
+					</h2>
+
+					<ul>
+						<li>Certificado de participação</li>
+						<li>Projeto avaliado pelos instrutores</li>
+					</ul>
+
+					<span>Cartão de crédito</span>
+
+					<button className="btn_padrao">Matricule-se</button>
+				</div>
+				<div className="card">
+					<h1>Semestral</h1>
+					<h2>
+						6x de <strong>R$60</strong>
+					</h2>
+
+					<ul>
+						<li>Certificado de participação</li>
+						<li>Projeto avaliado pelos instrutores</li>
+					</ul>
+
+					<span>Cartão de crédito</span>
+
+					<button className="btn_padrao">Matricule-se</button>
+				</div>
+				<div className="card">
+					<h1>Anual</h1>
+					<h2>
+						12x de <strong>R$45</strong>
+					</h2>
+
+					<ul>
+						<li>Certificado de participação</li>
+						<li>Projeto avaliado pelos instrutores</li>
+					</ul>
+
+					<span>Cartão de crédito</span>
+
+					<button className="btn_padrao">Matricule-se</button>
+				</div>
+			</Planos>
+			<Detalhes>
+				<div className="cardRow">
+					<div className="card">
+						<h1>Assista quando quiser</h1>
+						<p>Assista no celular, tablet, smart TV ou notebook.</p>
+					</div>
+					<div className="card">
+						<h1>O que é a Leap school?</h1>
+						<p>
+							Uma escola on-line com cursos nas áreas de, desenho,
+							ilustração, 3D e artes gráficas.
+						</p>
+					</div>
+				</div>
+				<div className="cardRow">
+					<div className="card">
+						<h1>O que eu tenho acesso?</h1>
+						<p>
+							Você pode assistir a todos os cursos, quando e onde
+							quiser, sem comerciais tudo por um preço bem
+							acessível.
+						</p>
+					</div>
+					<div className="card">
+						<h1>Tem certificado?</h1>
+						<p>
+							Emitimos certificado com as horas do curso que você
+							completou.
+						</p>
+					</div>
+				</div>
+			</Detalhes>
 			<SobreContainer>
 				<Sobre>
 					<TituloSobre>Sobre</TituloSobre>
