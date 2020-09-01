@@ -111,6 +111,9 @@ const Signup = () => {
 					Criar conta
 				</button>
 			</form>
+			<a href="/login">
+				<ButtonBack>Já tenho conta</ButtonBack>
+			</a>
 			<a href="/">
 				<ButtonBack>Voltar</ButtonBack>
 			</a>

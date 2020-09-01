@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import { Container } from "./styles";
 
 function Planos({ color }) {
@@ -8,7 +10,7 @@ function Planos({ color }) {
 			<div className="card">
 				<h1>Mensal</h1>
 				<h2>
-					<strong>R$90</strong>/mês
+					<strong>R$88</strong>/mês
 				</h2>
 
 				<ul>
@@ -18,12 +20,14 @@ function Planos({ color }) {
 
 				<span>Cartão de crédito</span>
 
-				<button className="btn_padrao">Matricule-se</button>
+				<Link to="/pagamento/mensal">
+					<button className="btn_padrao">Matricule-se</button>
+				</Link>
 			</div>
 			<div className="card">
 				<h1>Semestral</h1>
 				<h2>
-					6x de <strong>R$60</strong>
+					6x de <strong>R$57</strong>
 				</h2>
 
 				<ul>
@@ -33,7 +37,9 @@ function Planos({ color }) {
 
 				<span>Cartão de crédito</span>
 
-				<button className="btn_padrao">Matricule-se</button>
+				<Link to="/pagamento/semestral">
+					<button className="btn_padrao">Matricule-se</button>
+				</Link>
 			</div>
 			<div className="card">
 				<h1>Anual</h1>
@@ -48,7 +54,9 @@ function Planos({ color }) {
 
 				<span>Cartão de crédito</span>
 
-				<button className="btn_padrao">Matricule-se</button>
+				<Link to="/pagamento/anual">
+					<button className="btn_padrao">Matricule-se</button>
+				</Link>
 			</div>
 		</Container>
 	);

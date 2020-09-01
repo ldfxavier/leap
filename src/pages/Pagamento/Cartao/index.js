@@ -7,6 +7,7 @@ import api from "~/services/api";
 import Header from "../Header";
 
 import PaymentCard from "react-payment-card-component";
+import { Alert, Button } from "rsuite";
 
 function Cartao({ setTab, usuario }) {
 	/**
@@ -36,8 +37,15 @@ function Cartao({ setTab, usuario }) {
 	 * Parcelas
 	 */
 
-	const [plots, setPlots] = useState(1);
+	const [plots, setPlots] = useState(null);
 	const [installments, setInstallments] = useState();
+
+	/**
+	 * Botao
+	 */
+
+	const [loading, setLoading] = useState(null);
+	const [disabled, setDisabled] = useState();
 
 	/**
 	 * Produtos (Pacotes)
@@ -70,15 +78,17 @@ function Cartao({ setTab, usuario }) {
 	}
 
 	function checkout(cardToken) {
-		let telefone = replaceAll(usuario.telefone, " ", "");
-		telefone = replaceAll(usuario.telefone, "_", "");
-		telefone = usuario.telefone
+		let usuarioTelefone = String(usuario.telefone);
+		let telefone = replaceAll(usuarioTelefone, " ", "");
+		telefone = replaceAll(usuarioTelefone, "_", "");
+		telefone = usuarioTelefone
 			.replace(" ", "")
 			.replace("(", "")
 			.replace(")", "")
 			.replace("-", "");
 		let ddd = telefone.substring(2, 0);
 		telefone = telefone.substring(11, 2);
+		console.log("ok");
 
 		api.post("pagamento/checkout", {
 			cartao_token: cardToken,
@@ -115,7 +125,11 @@ function Cartao({ setTab, usuario }) {
 			.then((response) => {
 				console.log(response);
 			})
-			.catch((error) => console.log(error.response));
+			.catch((error) => console.log(error.response))
+			.finally(() => {
+				setLoading(false);
+				setDisabled(false);
+			});
 	}
 
 	useEffect(() => {
@@ -192,6 +206,7 @@ function Cartao({ setTab, usuario }) {
 			brand,
 			success: function (response) {
 				setInstallments(response.installments[brand]);
+				setPlots(1);
 			},
 			error: function (response) {
 				console.log(response);
@@ -206,28 +221,47 @@ function Cartao({ setTab, usuario }) {
 	 * Pegar token do cartao para checkout
 	 */
 
-	function createCardToken(e) {
-		e.preventDefault();
+	function createCardToken() {
+		// e.preventDefault();
 
-		const data = expiry.split("/");
-		const numberCard = Number(replaceAll(cardNumber, " ", ""));
+		setLoading(true);
+		setDisabled(true);
 
-		window.PagSeguroDirectPayment.createCardToken({
-			cardNumber: numberCard,
-			brand: brand?.name,
-			cvv,
-			expirationMonth: String(data[0]),
-			expirationYear: String(data[1]),
-			success: function (response) {
-				checkout(response.card.token);
-			},
-			error: function (response) {
-				// Callback para chamadas que falharam.
-			},
-			complete: function (response) {
-				// Callback para todas chamadas.
-			},
-		});
+		if (
+			cvv === "" ||
+			expiry === "" ||
+			cardNumber === "" ||
+			name === "" ||
+			plots === null
+		) {
+			Alert.error("Todos os campos são obrigatórios");
+			setLoading(false);
+			setDisabled(false);
+		} else {
+			const data = expiry.split("/");
+			const numberCard = Number(replaceAll(cardNumber, " ", ""));
+
+			window.PagSeguroDirectPayment.createCardToken({
+				cardNumber: numberCard,
+				brand: brand?.name,
+				cvv,
+				expirationMonth: String(data[0]),
+				expirationYear: String(data[1]),
+				success: function (response) {
+					setTimeout(() => {
+						checkout(response.card.token);
+					}, 1000);
+				},
+				error: function (response) {
+					// Callback para chamadas que falharam.
+					setLoading(false);
+					setDisabled(false);
+				},
+				complete: function (response) {
+					// Callback para todas chamadas.
+				},
+			});
+		}
 	}
 
 	/**
@@ -265,7 +299,7 @@ function Cartao({ setTab, usuario }) {
 						flipped={flipped}
 					/>
 				</Card>
-				<form onSubmit={createCardToken} method="POST">
+				<form method="POST">
 					<InputMask
 						placeholder="Numero do cartão de crédito"
 						mask="9999 9999 9999 9999"
@@ -315,7 +349,16 @@ function Cartao({ setTab, usuario }) {
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 					/>
-					<button className="btn_padrao">Finalizar compra</button>
+					{/* <button className="btn_padrao"></button> */}
+					<Button
+						onClick={createCardToken}
+						className="btn_padrao"
+						appearance="primary"
+						disabled={disabled}
+						loading={loading}
+					>
+						Finalizar compra
+					</Button>
 				</form>
 			</Container>
 		</>
