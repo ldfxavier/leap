@@ -3,12 +3,18 @@ import colors from "~/styles/colors";
 
 export const Container = styled.div`
 	display: flex;
+	flex-direction: column;
+	align-items: center;
 	justify-content: center;
 	background-color: ${colors.background};
 	padding: 20px;
 	border-radius: 5px;
+	width: 100%;
+	max-width: 520px;
 
 	form {
+		width: 100%;
+		margin-top: 20px;
 		input,
 		select {
 			background-color: #fff;
@@ -20,6 +26,7 @@ export const Container = styled.div`
 			color: ${colors.background};
 			width: 100%;
 			margin-bottom: 24px;
+			border-radius: 5px;
 		}
 
 		input.cvv {

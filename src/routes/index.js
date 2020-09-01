@@ -9,6 +9,8 @@ import SignUp from "../pages/Signup";
 import Perfil from "../pages/Perfil";
 import Cursos from "../pages/Cursos";
 import Curso from "../pages/Curso";
+import Pagamento from "../pages/Pagamento";
+import SemAcesso from "../pages/SemAcesso";
 
 const Routes = () => {
 	return (
@@ -16,9 +18,17 @@ const Routes = () => {
 			<Route path="/" exact component={Home} />
 			<Route path="/login" exact component={Login} />
 			<Route path="/signup" exact component={SignUp} />
-			<Route path="/Perfil" isPrivate exact component={Perfil} />
-			<Route path="/cursos" isPrivate exact component={Cursos} />
-			<Route path="/curso/:curso" isPrivate exact component={Curso} />
+			<Route path="/pagamento" exact component={Pagamento} />
+			<Route path="/perfil" isPrivate exact component={Perfil} />
+			<Route path="/cursos" isPrivate isBlock exact component={Cursos} />
+			<Route
+				path="/curso/:curso"
+				isPrivate
+				isBlock
+				exact
+				component={Curso}
+			/>
+			<Route path="/semAcesso" isPrivate exact component={SemAcesso} />
 		</Switch>
 	);
 };

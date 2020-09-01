@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useHistory } from "react-router-dom";
+
 import { Avatar, Icon } from "rsuite";
 
 import { Container } from "./styles";
@@ -8,12 +10,19 @@ import { Container } from "./styles";
 import logo from "~/assets/images/logo.png";
 
 const Header = () => {
+	const { push } = useHistory();
+
 	const [usuario, setUsuario] = useState();
 
 	useEffect(() => {
 		const dados = localStorage.getItem("@Usuario");
 		setUsuario(JSON.parse(dados));
 	}, []);
+
+	function logout() {
+		localStorage.clear();
+		push("/login");
+	}
 
 	return (
 		<Container>
@@ -22,7 +31,7 @@ const Header = () => {
 				<Link to="/cursos">
 					<strong>Cursos</strong>
 				</Link>
-				<Link to="/login">
+				<Link to="/login" onClick={logout}>
 					<strong>Sair</strong>
 				</Link>
 			</div>
@@ -31,7 +40,6 @@ const Header = () => {
 					<strong>{usuario?.dados.nome}</strong>
 					<p>{usuario?.dados.email}</p>
 				</div>
-				{/* <Badge content="20"> */}
 				<Link to="/perfil">
 					{usuario?.dados?.avatar ? (
 						<Avatar
@@ -44,7 +52,6 @@ const Header = () => {
 						<Icon icon="user-circle" size="3x" />
 					)}
 				</Link>
-				{/* </Badge> */}
 			</div>
 		</Container>
 	);

@@ -1,22 +1,16 @@
 import styled from "styled-components";
-
 import colors from "~/styles/colors";
 
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
-	padding: 0;
-	height: 100vh;
-
-	img {
-		width: 150px;
-		margin-bottom: 20px;
-	}
+	background-color: ${colors.background};
+	padding: 20px;
+	border-radius: 5px;
+	max-width: 520px;
 
 	form {
-		max-width: 300px;
 		input {
 			background-color: #fff;
 			height: 36px;
@@ -29,21 +23,5 @@ export const Container = styled.div`
 			margin-bottom: 24px;
 			border-radius: 5px;
 		}
-	}
-`;
-
-export const ButtonBack = styled.div`
-	padding: 10px 20px;
-	color: ${colors.primary};
-	width: 100%;
-	border-radius: 0px;
-	text-align: center;
-	margin-top: 20px;
-	&:hover {
-		text-decoration: underline;
-		color: ${colors.primary};
-	}
-	&:active {
-		color: ${colors.secundary};
 	}
 `;

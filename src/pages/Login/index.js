@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import api from "~/services/api";
 
 import { useHistory } from "react-router-dom";
@@ -25,10 +25,6 @@ const Login = () => {
 
 	const [email, setEmail] = useState("");
 	const [senha, setSenha] = useState("");
-
-	useEffect(() => {
-		localStorage.clear();
-	}, []);
 
 	const logIn = () => {
 		if (email === "" || senha === "") {

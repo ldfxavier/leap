@@ -1,18 +1,27 @@
 import React, { useEffect } from "react";
-import { Route, useHistory } from "react-router-dom";
-
-// import { Container } from './styles';
+import { Route, useHistory, useLocation } from "react-router-dom";
 
 function Routes(props) {
 	const { push } = useHistory();
+	const { pathname } = useLocation();
 
 	useEffect(() => {
 		const usuario = JSON.parse(localStorage.getItem("@Usuario"));
-		// eslint-disable-next-line react/prop-types
-		if (props.isPrivate && !usuario) {
-			push("login");
+
+		if (pathname === "/login" && usuario) {
+			push("cursos");
 		}
-	}, [props, push]);
+
+		if (props.isPrivate) {
+			if (!usuario) {
+				push("login");
+			}
+
+			if (usuario?.dados?.status === 2 && props.isBlock) {
+				push("semAcesso");
+			}
+		}
+	}, [pathname, props, push]);
 
 	return (
 		<div>
