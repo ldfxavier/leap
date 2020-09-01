@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import { useHistory } from "react-router-dom";
-
 import InputMask from "react-input-mask";
 
 import { Alert } from "rsuite";
@@ -11,8 +9,6 @@ import Header from "../Header";
 import { Container } from "./styles";
 
 const Usuario = ({ setTab, setUsuario, usuario }) => {
-	const { push } = useHistory();
-
 	const [errorVisible, setErrorVisible] = React.useState(false);
 	const errorMessage = errorVisible ? "Campo obrigatório" : null;
 
@@ -51,6 +47,7 @@ const Usuario = ({ setTab, setUsuario, usuario }) => {
 		) {
 			Alert.error("Todos os campos são obrigatórios");
 		} else if (senha === confirmar) {
+			// eslint-disable-next-line
 			{
 				setUsuario({
 					...usuario,
