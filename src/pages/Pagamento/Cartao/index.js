@@ -224,7 +224,7 @@ function Cartao({ setTab, usuario }) {
 		let cleanSpaces = replaceAll(number, " ", "");
 		let cleanUnderline = replaceAll(cleanSpaces, "_", "");
 
-		if (cleanUnderline.length === 6 || check) {
+		if (cleanUnderline.length >= 6 || check) {
 			window.PagSeguroDirectPayment.getBrand({
 				cardBin: cleanUnderline,
 				success: function (response) {
@@ -275,7 +275,8 @@ function Cartao({ setTab, usuario }) {
 			expiry === "" ||
 			cardNumber === "" ||
 			name === "" ||
-			plots === null
+			plots === null ||
+			planoSelect === ""
 		) {
 			Alert.error("Todos os campos são obrigatórios");
 			setLoading(false);
