@@ -177,7 +177,7 @@ const Home = () => {
 						mundial pela qualidade dos profissionais que gera,
 						sempre com o maximo zelo e ética profissional. Com base
 						forte e comprometida com a reciprocidade, respeito e
-						Transparência, A Leap school ofereçe a seus alunos
+						Transparência, A Leap school oferece a seus alunos
 						sempre o melhor.
 					</Texto>
 				</Sobre>
