@@ -102,6 +102,7 @@ function Cartao({ setTab, usuario }) {
 	}
 
 	function checkout(cardToken) {
+		console.log(cardToken);
 		if (planoSelect === "1" || planoSelect === "2" || planoSelect === "3") {
 			let usuarioTelefone = String(usuario.telefone);
 			let telefone = replaceAll(usuarioTelefone, " ", "");
