@@ -24,4 +24,14 @@ export const Container = styled.div`
 			border-radius: 5px;
 		}
 	}
+	a {
+		text-align: center;
+		color: ${colors.primary};
+		margin-top: 10px;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 `;

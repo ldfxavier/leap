@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import { useHistory } from "react-router-dom";
+
 import InputMask from "react-input-mask";
 
 import { Container, Card, Row } from "./styles";
@@ -10,6 +12,9 @@ import PaymentCard from "react-payment-card-component";
 import { Alert, Button } from "rsuite";
 
 function Cartao({ setTab, usuario }) {
+	const { push } = useHistory();
+
+	const usuarioToken = JSON.parse(localStorage.getItem("@Usuario"));
 	/**
 	 * States
 	 */
@@ -27,11 +32,17 @@ function Cartao({ setTab, usuario }) {
 	 */
 
 	const [flipped, setFlipped] = useState(false);
-	const [cvv, setCvv] = useState("989");
-	const [expiry, setExpiry] = useState("04/2021");
-	const [name, setName] = useState("Lucas F Xavier");
-	const [cardNumber, setCardNumber] = useState("5467 1270 8429 4277");
+	const [cvv, setCvv] = useState("");
+	const [expiry, setExpiry] = useState("");
+	const [name, setName] = useState("");
+	const [cardNumber, setCardNumber] = useState("");
 	const [brand, setBrand] = useState();
+
+	//dados de teste
+	// const [cvv, setCvv] = useState("989");
+	// const [expiry, setExpiry] = useState("04/2021");
+	// const [name, setName] = useState("Lucas F Xavier");
+	// const [cardNumber, setCardNumber] = useState("5467 1270 8429 4277");
 
 	/**
 	 * Parcelas
@@ -39,6 +50,11 @@ function Cartao({ setTab, usuario }) {
 
 	const [plots, setPlots] = useState(null);
 	const [installments, setInstallments] = useState();
+
+	/**
+	 * Plano
+	 */
+	const [planoSelect, setPlanoSelect] = useState();
 
 	/**
 	 * Botao
@@ -50,7 +66,7 @@ function Cartao({ setTab, usuario }) {
 	/**
 	 * Produtos (Pacotes)
 	 */
-	const [amount] = useState(500.0);
+	const [amount, setAmount] = useState(0);
 
 	/**
 	 * Funções úteis
@@ -77,59 +93,88 @@ function Cartao({ setTab, usuario }) {
 			.catch((error) => console.log(error.response));
 	}
 
-	function checkout(cardToken) {
-		let usuarioTelefone = String(usuario.telefone);
-		let telefone = replaceAll(usuarioTelefone, " ", "");
-		telefone = replaceAll(usuarioTelefone, "_", "");
-		telefone = usuarioTelefone
-			.replace(" ", "")
-			.replace("(", "")
-			.replace(")", "")
-			.replace("-", "");
-		let ddd = telefone.substring(2, 0);
-		telefone = telefone.substring(11, 2);
-		console.log("ok");
+	function setStorage({ status }) {
+		const user = {
+			...usuarioToken,
+			dados: { ...usuarioToken.dados, status },
+		};
+		localStorage.setItem("@Usuario", JSON.stringify(user));
+	}
 
-		api.post("pagamento/checkout", {
-			cartao_token: cardToken,
-			hash: senderHash,
-			item: [
+	function checkout(cardToken) {
+		if (planoSelect === "1" || planoSelect === "2" || planoSelect === "3") {
+			let usuarioTelefone = String(usuario.telefone);
+			let telefone = replaceAll(usuarioTelefone, " ", "");
+			telefone = replaceAll(usuarioTelefone, "_", "");
+			telefone = usuarioTelefone
+				.replace(" ", "")
+				.replace("(", "")
+				.replace(")", "")
+				.replace("-", "");
+			let ddd = telefone.substring(2, 0);
+			telefone = telefone.substring(11, 2);
+
+			let cursoDescription = "";
+
+			if (planoSelect === "1") {
+				cursoDescription = "Curso mensal";
+			} else if (planoSelect === "2") {
+				cursoDescription = "Curso semestral";
+			} else if (planoSelect === "3") {
+				cursoDescription = "Curso anual";
+			}
+
+			api.post(
+				"pagamento/checkout",
 				{
-					itemId: 1,
-					itemDescription: "Curso básico",
-					itemAmount: amount,
-					itemQuantity: 1,
+					cartao_token: cardToken,
+					hash: senderHash,
+					item: [
+						{
+							itemId: planoSelect,
+							itemDescription: cursoDescription,
+							itemAmount: amount,
+							itemQuantity: 1,
+						},
+					],
+					senderName: usuario.nome,
+					senderCPF: usuario.cpf,
+					senderAreaCode: ddd,
+					senderPhone: telefone,
+					senderEmail: "teste@sandbox.pagseguro.com.br",
+					installmentQuantity: plots,
+					installmentValue: installments[plots - 1].installmentAmount,
+					creditCardHolderName: name,
+					creditCardHolderCPF: usuario.cpf,
+					creditCardHolderBirthDate: usuario.nascimento,
+					creditCardHolderAreaCode: ddd,
+					creditCardHolderPhone: telefone,
+					billingAddressStreet: usuario.endereco,
+					billingAddressNumber: usuario.numero,
+					billingAddressComplement: usuario.complemento,
+					billingAddressDistrict: usuario.bairro,
+					billingAddressPostalCode: usuario.cep,
+					billingAddressCity: usuario.cidade,
+					billingAddressState: usuario.estado,
+					plano: planoSelect,
 				},
-			],
-			reference: "user321",
-			senderName: usuario.nome,
-			senderCPF: usuario.cpf,
-			senderAreaCode: ddd,
-			senderPhone: telefone,
-			senderEmail: "teste@sandbox.pagseguro.com.br",
-			installmentQuantity: plots,
-			installmentValue: installments[plots - 1].installmentAmount,
-			creditCardHolderName: name,
-			creditCardHolderCPF: usuario.cpf,
-			creditCardHolderBirthDate: usuario.nascimento,
-			creditCardHolderAreaCode: ddd,
-			creditCardHolderPhone: telefone,
-			billingAddressStreet: usuario.endereco,
-			billingAddressNumber: usuario.numero,
-			billingAddressComplement: usuario.complemento,
-			billingAddressDistrict: usuario.bairro,
-			billingAddressPostalCode: usuario.cep,
-			billingAddressCity: usuario.cidade,
-			billingAddressState: usuario.estado,
-		})
-			.then((response) => {
-				console.log(response);
-			})
-			.catch((error) => console.log(error.response))
-			.finally(() => {
-				setLoading(false);
-				setDisabled(false);
-			});
+				{
+					headers: {
+						Authorization: `Bearer ${usuarioToken?.access_token}`,
+					},
+				}
+			)
+				.then((response) => {
+					Alert.success(response.data.message);
+					setStorage(1);
+					push("/cursos");
+				})
+				.catch((error) => console.log(error.response))
+				.finally(() => {
+					setLoading(false);
+					setDisabled(false);
+				});
+		}
 	}
 
 	useEffect(() => {
@@ -165,7 +210,6 @@ function Cartao({ setTab, usuario }) {
 	function getSenderHash() {
 		window.PagSeguroDirectPayment.onSenderHashReady(function (response) {
 			if (response.status === "error") {
-				console.log(response.message);
 				return false;
 			}
 			setSenderHash(response.senderHash);
@@ -176,16 +220,15 @@ function Cartao({ setTab, usuario }) {
 	 * Pegar bandeira do cartão
 	 */
 
-	function getBrand(number) {
+	function getBrand(number, check = false) {
 		let cleanSpaces = replaceAll(number, " ", "");
 		let cleanUnderline = replaceAll(cleanSpaces, "_", "");
 
-		if (cleanUnderline.length === 6) {
+		if (cleanUnderline.length === 6 || check) {
 			window.PagSeguroDirectPayment.getBrand({
 				cardBin: cleanUnderline,
 				success: function (response) {
 					setBrand(response.brand);
-					getInstallments(response.brand.name);
 				},
 				error: function (response) {
 					console.log(response);
@@ -199,9 +242,9 @@ function Cartao({ setTab, usuario }) {
 	 * Pegar parcelas
 	 */
 
-	function getInstallments(brand) {
+	function getInstallments(brand, check) {
 		window.PagSeguroDirectPayment.getInstallments({
-			amount,
+			amount: check ? check : amount,
 			maxInstallmentNoInterest: 12,
 			brand,
 			success: function (response) {
@@ -334,6 +377,30 @@ function Cartao({ setTab, usuario }) {
 					</Row>
 
 					<select
+						placeholder="Plano..."
+						value={planoSelect}
+						onChange={(e) => {
+							var valor;
+
+							if (e.target.value === "1") {
+								valor = 88;
+							} else if (e.target.value === "2") {
+								valor = 342;
+							} else if (e.target.value === "3") {
+								valor = 540;
+							}
+							setAmount(valor);
+							getInstallments(brand?.name, valor);
+							setPlanoSelect(e.target.value);
+						}}
+					>
+						<option value="">Escolha um plano</option>
+						<option value="1">Mensal</option>
+						<option value="2">Semestral</option>
+						<option value="3">Anual</option>
+					</select>
+
+					<select
 						placeholder="Parcelas..."
 						value={plots}
 						onChange={(e) => {
@@ -349,7 +416,6 @@ function Cartao({ setTab, usuario }) {
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 					/>
-					{/* <button className="btn_padrao"></button> */}
 					<Button
 						onClick={createCardToken}
 						className="btn_padrao"

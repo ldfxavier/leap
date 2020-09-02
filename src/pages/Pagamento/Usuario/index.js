@@ -129,96 +129,100 @@ const Usuario = ({ setTab, setUsuario, usuario }) => {
 			<Header numero={1} setTab={setTab} />
 			<Container>
 				{conta ? (
-					<form onSubmit={logIn} method="POST">
-						<input
-							type="text"
-							onFocus={() => setErrorVisible(false)}
-							placeholder="E-mail"
-							errorMessage={errorMessage}
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-						/>
+					<>
+						<form onSubmit={logIn} method="POST">
+							<input
+								type="text"
+								onFocus={() => setErrorVisible(false)}
+								placeholder="E-mail"
+								errorMessage={errorMessage}
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+							/>
 
-						<input
-							type="password"
-							onFocus={() => setErrorVisible(false)}
-							placeholder="Senha"
-							errorMessage={errorMessage}
-							value={senha}
-							onChange={(e) => setSenha(e.target.value)}
-						/>
-						<button className="btn_padrao" appearance="primary">
-							Avançar
-						</button>
+							<input
+								type="password"
+								onFocus={() => setErrorVisible(false)}
+								placeholder="Senha"
+								errorMessage={errorMessage}
+								value={senha}
+								onChange={(e) => setSenha(e.target.value)}
+							/>
+							<button className="btn_padrao" appearance="primary">
+								Avançar
+							</button>
+						</form>
 						<Link onClick={() => setConta(false)}>
 							Não tenho conta
 						</Link>
-					</form>
+					</>
 				) : (
-					<form onSubmit={avancar} method="POST">
-						<input
-							type="text"
-							onFocus={() => setErrorVisible(false)}
-							placeholder="Nome completo"
-							errorMessage={errorMessage}
-							value={nome}
-							onChange={(e) => setNome(e.target.value)}
-						/>
+					<>
+						<form onSubmit={avancar} method="POST">
+							<input
+								type="text"
+								onFocus={() => setErrorVisible(false)}
+								placeholder="Nome completo"
+								errorMessage={errorMessage}
+								value={nome}
+								onChange={(e) => setNome(e.target.value)}
+							/>
 
-						<input
-							type="text"
-							onFocus={() => setErrorVisible(false)}
-							placeholder="E-mail"
-							errorMessage={errorMessage}
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-						/>
+							<input
+								type="text"
+								onFocus={() => setErrorVisible(false)}
+								placeholder="E-mail"
+								errorMessage={errorMessage}
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+							/>
 
-						<InputMask
-							mask="999.999.999-99"
-							value={cpf}
-							onChange={(e) => setCpf(e.target.value)}
-							placeholder="CPF"
-						/>
+							<InputMask
+								mask="999.999.999-99"
+								value={cpf}
+								onChange={(e) => setCpf(e.target.value)}
+								placeholder="CPF"
+							/>
 
-						<InputMask
-							mask="99/99/9999"
-							value={nascimento}
-							onChange={(e) => setNascimento(e.target.value)}
-							placeholder="Data de nascimento"
-						/>
+							<InputMask
+								mask="99/99/9999"
+								value={nascimento}
+								onChange={(e) => setNascimento(e.target.value)}
+								placeholder="Data de nascimento"
+							/>
 
-						<InputMask
-							mask="(99) 99999-9999"
-							value={telefone}
-							onChange={(e) => setTelefone(e.target.value)}
-							placeholder="Telefone celular"
-						/>
+							<InputMask
+								mask="(99) 99999-9999"
+								value={telefone}
+								onChange={(e) => setTelefone(e.target.value)}
+								placeholder="Telefone celular"
+							/>
 
-						<input
-							type="password"
-							onFocus={() => setErrorVisible(false)}
-							placeholder="Senha"
-							errorMessage={errorMessage}
-							value={senha}
-							onChange={(e) => setSenha(e.target.value)}
-						/>
+							<input
+								type="password"
+								onFocus={() => setErrorVisible(false)}
+								placeholder="Senha"
+								errorMessage={errorMessage}
+								value={senha}
+								onChange={(e) => setSenha(e.target.value)}
+							/>
 
-						<input
-							type="password"
-							onFocus={() => setErrorVisible(false)}
-							placeholder="Confirmar senha"
-							errorMessage={errorMessage}
-							value={confirmar}
-							onChange={(e) => setConfirmar(e.target.value)}
-						/>
-						<button className="btn_padrao" appearance="primary">
-							Avançar
-						</button>
+							<input
+								type="password"
+								onFocus={() => setErrorVisible(false)}
+								placeholder="Confirmar senha"
+								errorMessage={errorMessage}
+								value={confirmar}
+								onChange={(e) => setConfirmar(e.target.value)}
+							/>
+							<button className="btn_padrao" appearance="primary">
+								Avançar
+							</button>
+						</form>
 						<Link onClick={() => setConta(true)}>
 							Já tenho conta
 						</Link>
-					</form>
+					</>
 				)}
 			</Container>
 		</>

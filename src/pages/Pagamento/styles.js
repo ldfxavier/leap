@@ -5,10 +5,9 @@ import colors from "~/styles/colors";
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
 	justify-content: center;
 	align-items: center;
-	padding: 0;
+	padding: 20px;
 
 	img.logo {
 		width: 150px;
