@@ -5,8 +5,10 @@ import InputMask from "react-input-mask";
 import { Container, Row } from "./styles";
 import Header from "../Header";
 import { Alert } from "rsuite";
+import api from "~/services/api";
 
 function Endereco({ setTab, setUsuario, usuario }) {
+	const usuarioToken = JSON.parse(localStorage.getItem("@Usuario"));
 	/**
 	 * Dados do endereco
 	 */
@@ -98,17 +100,46 @@ function Endereco({ setTab, setUsuario, usuario }) {
 			Alert.error("O campo CEP é obrigatório");
 			return false;
 		} else {
-			setUsuario({
-				...usuario,
-				endereco,
-				numero,
-				bairro,
-				complemento,
-				cidade,
-				estado,
-				cep,
-			});
-			setTab(3);
+			api.put(
+				"/usuario",
+				{
+					nome: usuarioToken.dados.nome,
+					telefone: usuarioToken.dados.telefone,
+					logradouro: endereco,
+					numero,
+					bairro,
+					complemento,
+					cidade,
+					estado,
+					cep,
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${usuarioToken?.access_token}`,
+					},
+				}
+			)
+				.then((response) => {
+					setUsuario({
+						...usuario,
+						endereco,
+						numero,
+						bairro,
+						complemento,
+						cidade,
+						estado,
+						cep,
+					});
+					setTab(3);
+				})
+				.catch((error) => {
+					if (error.response.data.error === "token") {
+						Alert.error(
+							"Verifique todos os dados e tente novamente"
+						);
+					}
+					Alert.error(error.response.data.message);
+				});
 		}
 	};
 

@@ -22,7 +22,7 @@ export const Container = styled.div`
 		padding: 20px;
 		background: #fff;
 		margin: 1em;
-		box-shadow: 0 0 10px 0 rgba(120, 135, 182, 0.1);
+		box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
 
 		@media only screen and (max-device-width: 750px) {
 			margin-bottom: 20px;

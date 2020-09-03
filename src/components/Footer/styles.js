@@ -15,6 +15,10 @@ export const Container = styled.div`
 	border-style: solid;
 	border-color: ${colors.text};
 	padding: 20px;
+
+	a {
+		color: ${colors.text};
+	}
 `;
 
 export const Box = styled.div``;

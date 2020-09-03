@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Banner, Footer, Menu, Planos } from "../../components";
 
@@ -9,127 +9,71 @@ import {
 	LogoBg,
 	Logo,
 	Titulo,
-	SubTituloMaya,
 	Texto,
-	Lista,
 	SobreContainer,
 	Sobre,
 	TituloSobre,
 	Detalhes,
-	ModalCursos as Modal,
 } from "./styles";
 
-import Maya from "~/assets/images/logo_maya.svg";
-import Zbrush from "~/assets/images/logo_zbrush.png";
+import Curso3d from "~/assets/images/curso_3d.jpeg";
+import CursoDesenho from "~/assets/images/curso_desenho.jpeg";
 
 const Home = () => {
-	const [cursoFree, setCursoFree] = useState(false);
-	const [cursos, setCursos] = useState(false);
-
 	return (
 		<Container>
 			<Menu />
 			<Banner />
 			<Cursos>
-				<CursoCard
-					className="draw meet"
-					lg={8}
-					onClick={() => setCursos(true)}
-				>
+				<CursoCard className="draw meet" lg={8}>
 					<LogoBg>
-						<Logo src={Maya} />
+						<Logo src={Curso3d} />
 					</LogoBg>
-					<Titulo>START</Titulo>
-					<SubTituloMaya>
-						Torne-se um profissional em Maya
-					</SubTituloMaya>
+					<Titulo>Curso de 3D</Titulo>
 					<Texto>
-						Software de animação computadorizada, modelagem,
-						simulação e renderização 3D
+						<p>
+							Descubra os segredos da animação computadorizada,
+							modelagem, simulação e renderização 3D
+						</p>
+						<p>
+							Dê vida aos mais diversos personagens com
+							ferramentas de animação interativas;
+						</p>
+						<p>
+							Construa objetos, cenas e ambientes em 3D com os
+							recursos do software Autodesk Maya;
+						</p>
+						<p>
+							Crie efeitos fantásticos e simule a física dos mais
+							variados objetos;
+						</p>
 					</Texto>
-					<Lista>
-						<ul>
-							<li>
-								Dê vida a personagens realistas com ferramentas
-								de animação interativas.
-							</li>
-							<li>
-								Modele objetos e cenas 3D com ferramentas
-								intuitivas de modelagem de imagens no software
-								Maya®.
-							</li>
-							<li>
-								Crie efeitos realistas, de explosões à simulação
-								de tecidos.
-							</li>
-						</ul>
-					</Lista>
 				</CursoCard>
 
-				<CursoCard
-					className="draw meet"
-					lg={8}
-					onClick={() => setCursoFree(true)}
-				>
+				<CursoCard className="draw meet" lg={8}>
 					<LogoBg>
-						<Logo src={Zbrush} />
+						<Logo src={CursoDesenho} />
 					</LogoBg>
-					<Titulo>Cursos avançados</Titulo>
-					<SubTituloMaya>Seja o mestre da modelagem 3D</SubTituloMaya>
+					<Titulo>Cursos de desenho</Titulo>
 					<Texto>
-						Software de animação computadorizada, modelagem,
-						simulação e renderização 3D
+						<p>
+							Aperfeiçoe o artista que existe em você com os
+							métodos tradicionais e digitais!
+						</p>
+						<p>
+							Aprenda a base do desenho tradicional com foco em
+							retratos e referências fotográficas;
+						</p>
+						<p>
+							Domine a técnica de arte conceitual e do processo
+							criativo, ideal para criação de personagens para
+							animação, quadrinhos e muito mais;
+						</p>
+						<p>
+							Torne-se um profissional digital com as ferramentas
+							mais famosas do mercado.
+						</p>
 					</Texto>
-					<Lista>
-						<ul>
-							<li>
-								Dê vida a personagens realistas com ferramentas
-								de animação interativas.
-							</li>
-							<li>
-								Modele objetos e cenas 3D com ferramentas
-								intuitivas de modelagem de imagens no software
-								Maya®.
-							</li>
-							<li>
-								Crie efeitos realistas, de explosões à simulação
-								de tecidos.
-							</li>
-						</ul>
-					</Lista>
-				</CursoCard>
-
-				<CursoCard
-					className="draw meet"
-					lg={8}
-					onClick={() => setCursoFree(true)}
-				>
-					<LogoBg>
-						<Logo src={Zbrush} />
-					</LogoBg>
-					<Titulo>Cursos avançados</Titulo>
-					<SubTituloMaya>Seja o mestre da modelagem 3D</SubTituloMaya>
-					<Texto>
-						Software de animação computadorizada, modelagem,
-						simulação e renderização 3D
-					</Texto>
-					<Lista>
-						<ul>
-							<li>
-								Dê vida a personagens realistas com ferramentas
-								de animação interativas.
-							</li>
-							<li>
-								Modele objetos e cenas 3D com ferramentas
-								intuitivas de modelagem de imagens no software
-								Maya®.
-							</li>
-							<li>
-								Crie efeitos realistas, de explosões à simulação
-								de tecidos.
-							</li>
-						</ul>
-					</Lista>
 				</CursoCard>
 			</Cursos>
 			<Planos />
@@ -183,21 +127,6 @@ const Home = () => {
 				</Sobre>
 			</SobreContainer>
 			<Footer />
-			<Modal show={cursos} onHide={() => setCursos(false)}>
-				<Modal.Header>
-					<Modal.Title>Cursos gratuitos</Modal.Title>
-				</Modal.Header>
-				<Modal.Body></Modal.Body>
-				<Modal.Footer></Modal.Footer>
-			</Modal>
-
-			<Modal show={cursoFree} onHide={() => setCursoFree(false)}>
-				<Modal.Header>
-					<Modal.Title>Cursos avançados</Modal.Title>
-				</Modal.Header>
-				<Modal.Body></Modal.Body>
-				<Modal.Footer></Modal.Footer>
-			</Modal>
 		</Container>
 	);
 };

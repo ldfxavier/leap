@@ -4,6 +4,9 @@ import colors from "~/styles/colors";
 
 import { Modal } from "rsuite";
 
+import bg1 from "~/assets/images/bg1.png";
+import bg2 from "~/assets/images/bg2.png";
+
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -12,9 +15,9 @@ export const Container = styled.div`
 export const Cursos = styled.div`
 	display: flex;
 	background-color: ${colors.background};
-	justify-content: center;
 	align-items: center;
 	padding: 20px;
+	justify-content: center;
 
 	.draw {
 		transition: color 0.25s;
@@ -74,9 +77,12 @@ export const CursoCard = styled.div`
 	margin: 1em;
 	padding: 1em 2em;
 	align-items: center;
+	max-width: 400px;
+	height: 450px;
 
 	font-size: inherit;
 	font-weight: 700;
+	text-align: justify;
 
 	position: relative;
 	vertical-align: middle;
@@ -95,29 +101,27 @@ export const LogoBg = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin: 10px;
+`;
+export const Logo = styled.img`
 	height: 100px;
 	width: 100px;
-	margin: 10px;
 	border-radius: 50px;
 	border-width: 2px;
 	border-style: solid;
 	border-color: ${colors.primary};
-	padding: 10px;
-`;
-export const Logo = styled.img`
-	height: 55px;
-	width: 55px;
 `;
 
 export const Titulo = styled.h1`
-	color: #fff;
+	color: ${colors.primary};
+	margin-bottom: 10px;
 `;
 
 export const SubTituloMaya = styled.h2`
 	padding: 0;
 	margin: 0;
-	color: ${colors.primary};
 	font-size: 14px;
+	color: ${colors.primary};
 `;
 
 export const Texto = styled.p`
@@ -155,11 +159,23 @@ export const TituloSobre = styled.h1`
 export const Detalhes = styled.div`
 	display: flex;
 	flex-direction: column;
-	background-color: ${colors.background};
+
+	background-image: url(${bg1}), url(${bg2});
+	background-position: left, right;
+	background-repeat: no-repeat, no-repeat;
+	background-size: 400px, 550px;
+
 	color: ${colors.secundary};
 	padding: 20px;
 	justify-content: center;
 	align-items: center;
+
+	@media only screen and (max-device-width: 750px) {
+		background-image: url(${bg1});
+		background-position: right;
+		background-repeat: no-repeat;
+		background-size: 400px;
+	}
 
 	div.cardRow {
 		display: flex;

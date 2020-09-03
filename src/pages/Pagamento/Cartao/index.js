@@ -32,17 +32,17 @@ function Cartao({ setTab, usuario }) {
 	 */
 
 	const [flipped, setFlipped] = useState(false);
-	const [cvv, setCvv] = useState("");
-	const [expiry, setExpiry] = useState("");
-	const [name, setName] = useState("");
-	const [cardNumber, setCardNumber] = useState("");
+	// const [cvv, setCvv] = useState("");
+	// const [expiry, setExpiry] = useState("");
+	// const [name, setName] = useState("");
+	// const [cardNumber, setCardNumber] = useState("");
 	const [brand, setBrand] = useState();
 
 	//dados de teste
-	// const [cvv, setCvv] = useState("989");
-	// const [expiry, setExpiry] = useState("04/2021");
-	// const [name, setName] = useState("Lucas F Xavier");
-	// const [cardNumber, setCardNumber] = useState("5467 1270 8429 4277");
+	const [cvv, setCvv] = useState("989");
+	const [expiry, setExpiry] = useState("04/2021");
+	const [name, setName] = useState("Lucas F Xavier");
+	const [cardNumber, setCardNumber] = useState("5467 1270 8429 4277");
 
 	/**
 	 * Parcelas
@@ -83,16 +83,6 @@ function Cartao({ setTab, usuario }) {
 		return string.split(search).join(replace);
 	}
 
-	function getSession() {
-		api.get("pagamento/sessao")
-			.then((response) => {
-				// setSession(response.data?.code);
-
-				window.PagSeguroDirectPayment.setSessionId(response.data?.code);
-			})
-			.catch((error) => console.log(error.response));
-	}
-
 	function setStorage({ status }) {
 		const user = {
 			...usuarioToken,
@@ -102,7 +92,6 @@ function Cartao({ setTab, usuario }) {
 	}
 
 	function checkout(cardToken) {
-		console.log(cardToken);
 		if (planoSelect === "1" || planoSelect === "2" || planoSelect === "3") {
 			let usuarioTelefone = String(usuario.telefone);
 			let telefone = replaceAll(usuarioTelefone, " ", "");
@@ -170,7 +159,9 @@ function Cartao({ setTab, usuario }) {
 					setStorage(1);
 					push("/cursos");
 				})
-				.catch((error) => console.log(error.response))
+				.catch((error) => {
+					Alert.success(error.response.data.texto);
+				})
 				.finally(() => {
 					setLoading(false);
 					setDisabled(false);
@@ -178,31 +169,33 @@ function Cartao({ setTab, usuario }) {
 		}
 	}
 
+	/**
+	 * Sessão pagseguro
+	 */
+
+	function getSession() {
+		api.get("pagamento/sessao")
+			.then((response) => {
+				// setSession(response.data?.code);
+
+				window.PagSeguroDirectPayment.setSessionId(response.data?.code);
+			})
+			.catch((error) => console.log(error.response));
+	}
+
+	useEffect(() => {
+		const script = document.createElement("script");
+
+		script.src =
+			"https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js";
+		script.async = true;
+
+		document.body.appendChild(script);
+	}, []);
+
 	useEffect(() => {
 		getSession();
 	}, []);
-
-	/**
-	 * Metodos de pagamento
-	 */
-
-	// function getPaymentMethods() {
-	// 	window.PagSeguroDirectPayment.getPaymentMethods({
-	// 		amount: 100.0,
-	// 		success: function (response) {
-	// 			// Retorna os meios de pagamento disponíveis.
-	// 			console.log(response);
-	// 		},
-	// 		error: function (response) {
-	// 			// Callback para chamadas que falharam.
-	// 			console.log(response);
-	// 		},
-	// 		complete: function (response) {
-	// 			// Callback para todas chamadas.
-	// 			console.log(response);
-	// 		},
-	// 	});
-	// }
 
 	/**
 	 * Hash de segurança pra o usuário
@@ -225,7 +218,7 @@ function Cartao({ setTab, usuario }) {
 		let cleanSpaces = replaceAll(number, " ", "");
 		let cleanUnderline = replaceAll(cleanSpaces, "_", "");
 
-		if (cleanUnderline.length >= 6 || check) {
+		if (cleanUnderline.length === 6 || check) {
 			window.PagSeguroDirectPayment.getBrand({
 				cardBin: cleanUnderline,
 				success: function (response) {
@@ -243,13 +236,25 @@ function Cartao({ setTab, usuario }) {
 	 * Pegar parcelas
 	 */
 
-	function getInstallments(brand, check) {
+	function getInstallments(brand, valor, plano) {
 		window.PagSeguroDirectPayment.getInstallments({
-			amount: check ? check : amount,
+			amount: valor ? valor : amount,
 			maxInstallmentNoInterest: 12,
 			brand,
 			success: function (response) {
-				setInstallments(response.installments[brand]);
+				let qntParcela = 1;
+				if (plano === "2") {
+					qntParcela = 6;
+				} else if (plano === "3") {
+					qntParcela = 12;
+				}
+
+				let installments = response.installments[brand].splice(
+					0,
+					qntParcela
+				);
+
+				setInstallments(installments);
 				setPlots(1);
 			},
 			error: function (response) {
@@ -352,7 +357,7 @@ function Cartao({ setTab, usuario }) {
 							setCardNumber(e.target.value);
 							getBrand(e.target.value);
 						}}
-						onBlur={() => getSenderHash()}
+						onBlur={(e) => getBrand(e.target.value, true)}
 						value={cardNumber}
 					/>
 					<Row>
@@ -364,7 +369,10 @@ function Cartao({ setTab, usuario }) {
 								setCvv(e.target.value);
 							}}
 							onFocus={() => setFlipped(true)}
-							onBlur={() => setFlipped(false)}
+							onBlur={() => {
+								setFlipped(false);
+								getSenderHash();
+							}}
 							value={cvv}
 						/>
 						<InputMask
@@ -382,6 +390,8 @@ function Cartao({ setTab, usuario }) {
 						placeholder="Plano..."
 						value={planoSelect}
 						onChange={(e) => {
+							setPlanoSelect(e.target.value);
+
 							var valor;
 
 							if (e.target.value === "1") {
@@ -392,8 +402,7 @@ function Cartao({ setTab, usuario }) {
 								valor = 540;
 							}
 							setAmount(valor);
-							getInstallments(brand?.name, valor);
-							setPlanoSelect(e.target.value);
+							getInstallments(brand?.name, valor, e.target.value);
 						}}
 					>
 						<option value="">Escolha um plano</option>

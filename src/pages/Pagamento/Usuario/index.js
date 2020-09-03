@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -14,6 +14,8 @@ import api from "~/services/api";
 const Usuario = ({ setTab, setUsuario, usuario }) => {
 	const [errorVisible, setErrorVisible] = React.useState(false);
 	const errorMessage = errorVisible ? "Campo obrigatório" : null;
+
+	const usuarioToken = JSON.parse(localStorage.getItem("@Usuario"));
 
 	const [conta, setConta] = useState(false);
 	const [nome, setNome] = useState(
@@ -37,6 +39,43 @@ const Usuario = ({ setTab, setUsuario, usuario }) => {
 	const [confirmar, setConfirmar] = useState(
 		usuario?.senha !== undefined ? usuario.senha : ""
 	);
+
+	useEffect(() => {
+		if (usuarioToken) {
+			const {
+				nome,
+				email,
+				cpf,
+				data_nascimento,
+				telefone,
+				logradouro,
+				numero,
+				estado,
+				cep,
+				bairro,
+				cidade,
+				complemento,
+			} = usuarioToken.dados;
+
+			setUsuario({
+				...usuario,
+				nome,
+				email,
+				cpf,
+				nascimento: data_nascimento,
+				telefone,
+				endereco: logradouro,
+				numero,
+				estado,
+				cep,
+				bairro,
+				cidade,
+				complemento,
+			});
+			setTab(2);
+		}
+		// eslint-disable-next-line
+	}, []);
 
 	const avancar = (e) => {
 		e.preventDefault();
@@ -100,7 +139,6 @@ const Usuario = ({ setTab, setUsuario, usuario }) => {
 				password: senha,
 			})
 				.then((response) => {
-					console.log(response);
 					setUsuario({
 						...usuario,
 						nome: response.data.dados.nome,
