@@ -131,7 +131,7 @@ function Cartao({ setTab, usuario }) {
 					senderCPF: usuario.cpf,
 					senderAreaCode: ddd,
 					senderPhone: telefone,
-					senderEmail: "teste@sandbox.pagseguro.com.br",
+					senderEmail: usuario.email,
 					installmentQuantity: plots,
 					installmentValue: installments[plots - 1].installmentAmount,
 					creditCardHolderName: name,

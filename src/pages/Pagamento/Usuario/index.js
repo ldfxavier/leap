@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
-
 import InputMask from "react-input-mask";
 
 import { Alert } from "rsuite";
@@ -183,9 +181,12 @@ const Usuario = ({ setTab, setUsuario, usuario }) => {
 								Avançar
 							</button>
 						</form>
-						<Link to="" onClick={() => setConta(false)}>
+						<button
+							className="link"
+							onClick={() => setConta(false)}
+						>
 							Não tenho conta
-						</Link>
+						</button>
 					</>
 				) : (
 					<>
@@ -242,9 +243,9 @@ const Usuario = ({ setTab, setUsuario, usuario }) => {
 								Avançar
 							</button>
 						</form>
-						<Link to="" onClick={() => setConta(true)}>
+						<button className="link" onClick={() => setConta(true)}>
 							Já tenho conta
-						</Link>
+						</button>
 					</>
 				)}
 			</Container>

@@ -10,6 +10,12 @@ export const Container = styled.div`
 	border-radius: 5px;
 	max-width: 520px;
 
+	button.link {
+		background-color: transparent;
+		color: ${colors.primary};
+		margin-top: 10px;
+	}
+
 	form {
 		input {
 			background-color: #fff;
