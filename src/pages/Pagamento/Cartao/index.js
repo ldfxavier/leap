@@ -187,7 +187,7 @@ function Cartao({ setTab, usuario }) {
 		const script = document.createElement("script");
 
 		script.src =
-			"https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js";
+			"https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js";
 		script.async = true;
 
 		document.body.appendChild(script);
