@@ -28,6 +28,11 @@ export const Container = styled.div`
 			width: 60px;
 		}
 
+		input.cep {
+			margin-right: 5px;
+			width: 110px;
+		}
+
 		input.cidade,
 		input.bairro {
 			margin-right: 5px;

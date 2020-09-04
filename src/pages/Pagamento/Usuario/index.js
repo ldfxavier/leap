@@ -12,9 +12,6 @@ import { Container } from "./styles";
 import api from "~/services/api";
 
 const Usuario = ({ setTab, setUsuario, usuario }) => {
-	const [errorVisible, setErrorVisible] = React.useState(false);
-	const errorMessage = errorVisible ? "Campo obrigatório" : null;
-
 	const usuarioToken = JSON.parse(localStorage.getItem("@Usuario"));
 
 	const [conta, setConta] = useState(false);
@@ -171,18 +168,14 @@ const Usuario = ({ setTab, setUsuario, usuario }) => {
 						<form onSubmit={logIn} method="POST">
 							<input
 								type="text"
-								onFocus={() => setErrorVisible(false)}
 								placeholder="E-mail"
-								errorMessage={errorMessage}
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 							/>
 
 							<input
 								type="password"
-								onFocus={() => setErrorVisible(false)}
 								placeholder="Senha"
-								errorMessage={errorMessage}
 								value={senha}
 								onChange={(e) => setSenha(e.target.value)}
 							/>
@@ -190,7 +183,7 @@ const Usuario = ({ setTab, setUsuario, usuario }) => {
 								Avançar
 							</button>
 						</form>
-						<Link onClick={() => setConta(false)}>
+						<Link to="" onClick={() => setConta(false)}>
 							Não tenho conta
 						</Link>
 					</>
@@ -199,18 +192,14 @@ const Usuario = ({ setTab, setUsuario, usuario }) => {
 						<form onSubmit={avancar} method="POST">
 							<input
 								type="text"
-								onFocus={() => setErrorVisible(false)}
 								placeholder="Nome completo"
-								errorMessage={errorMessage}
 								value={nome}
 								onChange={(e) => setNome(e.target.value)}
 							/>
 
 							<input
 								type="text"
-								onFocus={() => setErrorVisible(false)}
 								placeholder="E-mail"
-								errorMessage={errorMessage}
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 							/>
@@ -238,18 +227,14 @@ const Usuario = ({ setTab, setUsuario, usuario }) => {
 
 							<input
 								type="password"
-								onFocus={() => setErrorVisible(false)}
 								placeholder="Senha"
-								errorMessage={errorMessage}
 								value={senha}
 								onChange={(e) => setSenha(e.target.value)}
 							/>
 
 							<input
 								type="password"
-								onFocus={() => setErrorVisible(false)}
 								placeholder="Confirmar senha"
-								errorMessage={errorMessage}
 								value={confirmar}
 								onChange={(e) => setConfirmar(e.target.value)}
 							/>
@@ -257,7 +242,7 @@ const Usuario = ({ setTab, setUsuario, usuario }) => {
 								Avançar
 							</button>
 						</form>
-						<Link onClick={() => setConta(true)}>
+						<Link to="" onClick={() => setConta(true)}>
 							Já tenho conta
 						</Link>
 					</>

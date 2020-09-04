@@ -6,6 +6,7 @@ import { Container, Row } from "./styles";
 import Header from "../Header";
 import { Alert } from "rsuite";
 import api from "~/services/api";
+import apiCep from "~/services/apiCep";
 
 function Endereco({ setTab, setUsuario, usuario }) {
 	const usuarioToken = JSON.parse(localStorage.getItem("@Usuario"));
@@ -68,6 +69,37 @@ function Endereco({ setTab, setUsuario, usuario }) {
 		SE: "Sergipe",
 		TO: "Tocantins",
 	};
+
+	/**
+	 * Pesquisar cep
+	 */
+
+	async function pesquisacep(valor) {
+		var cep = valor.replace(/\D/g, "");
+
+		if (cep !== "") {
+			var validacep = /^[0-9]{8}$/;
+			if (validacep.test(cep)) {
+				await apiCep
+					.get(`/${cep}/json`)
+					.then((response) => {
+						const {
+							bairro,
+							complemento,
+							localidade,
+							logradouro,
+							uf,
+						} = response.data;
+						setEndereco(logradouro);
+						setBairro(bairro);
+						setComplemento(complemento);
+						setCidade(localidade);
+						setEstado(uf);
+					})
+					.catch((error) => console.log(error.response));
+			}
+		}
+	}
 
 	function options() {
 		var es = Object.entries(estados);
@@ -148,14 +180,26 @@ function Endereco({ setTab, setUsuario, usuario }) {
 			<Header numero={2} setTab={setTab} />
 			<Container>
 				<form onSubmit={avancar} method="POST">
-					<input
-						type="text"
-						value={endereco}
-						placeholder="Endereço"
-						onChange={(e) => {
-							setEndereco(e.target.value);
-						}}
-					/>
+					<Row>
+						<InputMask
+							placeholder="CEP"
+							className="cep"
+							mask="99.999-999"
+							onChange={(e) => {
+								setCep(e.target.value);
+							}}
+							onBlur={(e) => pesquisacep(e.target.value)}
+							value={cep}
+						/>
+						<input
+							type="text"
+							value={endereco}
+							placeholder="Endereço"
+							onChange={(e) => {
+								setEndereco(e.target.value);
+							}}
+						/>
+					</Row>
 					<Row>
 						<input
 							type="number"
@@ -195,15 +239,6 @@ function Endereco({ setTab, setUsuario, usuario }) {
 								setBairro(e.target.value);
 							}}
 							value={bairro}
-						/>
-
-						<InputMask
-							placeholder="CEP"
-							mask="99.999-999"
-							onChange={(e) => {
-								setCep(e.target.value);
-							}}
-							value={cep}
 						/>
 					</Row>
 
