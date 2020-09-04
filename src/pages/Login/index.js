@@ -16,6 +16,7 @@ import {
 } from "rsuite";
 
 import { Container, ButtonBack } from "./styles";
+import Loading from "~/components/Loading";
 
 const Login = () => {
 	const { push } = useHistory();
@@ -26,7 +27,10 @@ const Login = () => {
 	const [email, setEmail] = useState("");
 	const [senha, setSenha] = useState("");
 
+	const [loading, setLoading] = useState(false);
+
 	const logIn = () => {
+		setLoading(true);
 		if (email === "" || senha === "") {
 			setErrorVisible(true);
 		} else {
@@ -46,12 +50,15 @@ const Login = () => {
 				})
 				.catch((error) => {
 					Alert.error(error.response.data.message);
-				});
+				})
+				.finally((response) => setLoading(false));
 		}
 	};
 
 	return (
 		<Container fluid>
+			{loading && <Loading />}
+
 			<div>
 				<img className="logo" alt="logo" src={logo} />
 			</div>

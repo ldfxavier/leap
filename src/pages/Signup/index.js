@@ -8,6 +8,7 @@ import InputMask from "react-input-mask";
 import logo from "~/assets/images/logo.png";
 
 import { Alert } from "rsuite";
+import Loading from "~/components/Loading";
 
 import { Container, ButtonBack } from "./styles";
 
@@ -22,8 +23,11 @@ const Signup = () => {
 	const [senha, setSenha] = useState("");
 	const [confirmar, setConfirmar] = useState("");
 
+	const [loading, setLoading] = useState(false);
+
 	const signUp = (e) => {
 		e.preventDefault();
+		setLoading(true);
 
 		if (senha === confirmar) {
 			api.post("/usuario", {
@@ -46,7 +50,8 @@ const Signup = () => {
 				})
 				.catch((error) => {
 					Alert.error(error.response.data.message);
-				});
+				})
+				.finally((response) => setLoading(false));
 		} else {
 			Alert.error("As senhas não são iguais!");
 		}
@@ -54,6 +59,7 @@ const Signup = () => {
 
 	return (
 		<Container>
+			{loading && <Loading />}
 			<div>
 				<img className="logo" alt="logo" src={logo} />
 			</div>

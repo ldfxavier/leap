@@ -11,6 +11,35 @@ export const Container = styled.div`
 	-webkit-box-pack: center;
 	justify-content: center;
 	width: 100%;
+
+	form.endereco {
+		input,
+		select {
+			background-color: ${colors.background};
+			height: 36px;
+			padding: 0px 10px 0px 10px;
+			line-height: 36px;
+			margin-bottom: 10px;
+			border: 1px solid ${shade(0.3, colors.background)};
+			color: ${colors.secundary};
+			width: 100%;
+			margin-bottom: 24px;
+			border-radius: 5px;
+		}
+	}
+`;
+
+export const Row = styled.div`
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+`;
+
+export const Column = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-right: 5px;
 `;
 
 export const Body = styled.div`
@@ -58,8 +87,8 @@ export const Menu = styled.div`
 		border: solid 2px ${colors.primary};
 	}
 
-	.rs-uploader-trigger-btn{
-		img{
+	.rs-uploader-trigger-btn {
+		img {
 			object-fit: cover;
 		}
 	}
@@ -71,7 +100,10 @@ export const Menu = styled.div`
 		margin-left: -2px;
 		margin-top: -17px;
 		/* color: ${colors.secundary};
-		background-color: ${shade(0.2, colors.background)}; */
+		background-color: ${shade(
+			0.2,
+			colors.background
+		)}; */
 	}
 
 	h1 {

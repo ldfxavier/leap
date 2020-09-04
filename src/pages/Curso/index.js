@@ -7,6 +7,8 @@ import parse from "html-react-parser";
 
 import { useRouteMatch } from "react-router-dom";
 
+import Loading from "~/components/Loading";
+
 import {
 	Container,
 	TimeLineVideo,
@@ -26,8 +28,11 @@ const Curso = (props) => {
 	const [index, setIndex] = useState(0);
 	const [aulas, setAulas] = useState(0);
 
+	const [loading, setLoading] = useState(false);
+
 	const curso = async () => {
 		const usuario = JSON.parse(localStorage.getItem("@Usuario"));
+		setLoading(true);
 
 		await api
 			.get(`/cursos/${params.curso}`, {
@@ -39,11 +44,12 @@ const Curso = (props) => {
 				setAulas(response.data.aulas);
 			})
 			.catch((error) => {
-				if (error.response.data.error === "token") {
+				if (error?.response?.data?.error === "token") {
 					push("/login");
 				}
 				console.log(error.response);
-			});
+			})
+			.finally((response) => setLoading(false));
 	};
 
 	useEffect(() => {
@@ -100,6 +106,7 @@ const Curso = (props) => {
 
 	return (
 		<>
+			{loading && <Loading />}
 			<Header />
 			{renderContainer()}
 		</>

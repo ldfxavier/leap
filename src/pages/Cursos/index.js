@@ -9,6 +9,8 @@ import { Container, List, Form, Categoria } from "./styles";
 
 import { Header } from "~/components";
 
+import Loading from "~/components/Loading";
+
 import "react-multi-carousel/lib/styles.css";
 
 const responsive = {
@@ -40,7 +42,10 @@ const Cursos = () => {
 	const [resultadoBusca, setResultadoBusca] = useState(false);
 	const [texto, setTexto] = useState("");
 
+	const [loading, setLoading] = useState(false);
+
 	async function cursos() {
+		setLoading(true);
 		await api
 			.get("/categorias/cursos/1", {
 				headers: {
@@ -55,7 +60,8 @@ const Cursos = () => {
 					push("/login");
 				}
 				console.log(error.response);
-			});
+			})
+			.finally((response) => setLoading(false));
 	}
 
 	useEffect(() => {
@@ -335,6 +341,7 @@ const Cursos = () => {
 
 	return (
 		<>
+			{loading && <Loading />}
 			<Header />
 			<Container>
 				<Form onSubmit={busca}>
