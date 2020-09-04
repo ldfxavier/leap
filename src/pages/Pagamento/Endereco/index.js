@@ -177,7 +177,7 @@ function Endereco({ setTab, setUsuario, usuario }) {
 
 	return (
 		<>
-			<Header numero={2} setTab={setTab} />
+			<Header numero={2} />
 			<Container>
 				<form onSubmit={avancar} method="POST">
 					<Row>

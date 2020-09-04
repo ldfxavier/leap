@@ -134,13 +134,34 @@ const Usuario = ({ setTab, setUsuario, usuario }) => {
 				password: senha,
 			})
 				.then((response) => {
+					const {
+						nome,
+						email,
+						cpf,
+						data_nascimento,
+						telefone,
+						logradouro,
+						bairro,
+						complemento,
+						estado,
+						cidade,
+						cep,
+						numero,
+					} = response.data.dados;
 					setUsuario({
 						...usuario,
-						nome: response.data.dados.nome,
-						email: response.data.dados.email,
-						cpf: response.data.dados.cpf,
-						nascimento: response.data.dados.data_nascimento,
-						telefone: response.data.dados.telefone,
+						nome,
+						email,
+						cpf,
+						nascimento: data_nascimento,
+						telefone,
+						endereco: logradouro,
+						bairro,
+						complemento,
+						estado,
+						cidade,
+						cep,
+						numero,
 					});
 					localStorage.setItem(
 						"@Usuario",
@@ -159,7 +180,7 @@ const Usuario = ({ setTab, setUsuario, usuario }) => {
 
 	return (
 		<>
-			<Header numero={1} setTab={setTab} />
+			<Header numero={1} />
 			<Container>
 				{conta ? (
 					<>

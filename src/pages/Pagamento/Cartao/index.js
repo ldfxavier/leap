@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import { useHistory } from "react-router-dom";
-
 import InputMask from "react-input-mask";
 
 import { Container, Card, Row } from "./styles";
@@ -11,9 +9,7 @@ import Header from "../Header";
 import PaymentCard from "react-payment-card-component";
 import { Alert, Button } from "rsuite";
 
-function Cartao({ setTab, usuario }) {
-	const { push } = useHistory();
-
+function Cartao({ setTab, setUsuario, usuario }) {
 	const usuarioToken = JSON.parse(localStorage.getItem("@Usuario"));
 	/**
 	 * States
@@ -32,17 +28,17 @@ function Cartao({ setTab, usuario }) {
 	 */
 
 	const [flipped, setFlipped] = useState(false);
-	const [cvv, setCvv] = useState("");
-	const [expiry, setExpiry] = useState("");
-	const [name, setName] = useState("");
-	const [cardNumber, setCardNumber] = useState("");
+	// const [cvv, setCvv] = useState("");
+	// const [expiry, setExpiry] = useState("");
+	// const [name, setName] = useState("");
+	// const [cardNumber, setCardNumber] = useState("");
 	const [brand, setBrand] = useState();
 
 	//dados de teste
-	// const [cvv, setCvv] = useState("989");
-	// const [expiry, setExpiry] = useState("04/2021");
-	// const [name, setName] = useState("Lucas F Xavier");
-	// const [cardNumber, setCardNumber] = useState("5467 1270 8429 4277");
+	const [cvv, setCvv] = useState("989");
+	const [expiry, setExpiry] = useState("04/2021");
+	const [name, setName] = useState("Lucas F Xavier");
+	const [cardNumber, setCardNumber] = useState("5467 1270 8429 4277");
 
 	/**
 	 * Parcelas
@@ -81,14 +77,6 @@ function Cartao({ setTab, usuario }) {
 
 	function replaceAll(string, search, replace) {
 		return string.split(search).join(replace);
-	}
-
-	function setStorage({ status }) {
-		const user = {
-			...usuarioToken,
-			dados: { ...usuarioToken.dados, status },
-		};
-		localStorage.setItem("@Usuario", JSON.stringify(user));
 	}
 
 	function checkout(cardToken) {
@@ -132,6 +120,7 @@ function Cartao({ setTab, usuario }) {
 					senderAreaCode: ddd,
 					senderPhone: telefone,
 					senderEmail: usuario.email,
+					// senderEmail: "teste@sandbox.pagseguro.com.br",
 					installmentQuantity: plots,
 					installmentValue: installments[plots - 1].installmentAmount,
 					creditCardHolderName: name,
@@ -156,8 +145,13 @@ function Cartao({ setTab, usuario }) {
 			)
 				.then((response) => {
 					Alert.success(response.data.message);
-					setStorage(1);
-					push("/cursos");
+					setUsuario({
+						...usuario,
+						plano: planoSelect,
+						parcela: plots,
+						valor: amount,
+					});
+					setTab(4);
 				})
 				.catch((error) => {
 					Alert.success(error.response.data.texto);
@@ -187,7 +181,7 @@ function Cartao({ setTab, usuario }) {
 		const script = document.createElement("script");
 
 		script.src =
-			"https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js";
+			"https://stc.sandbox.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js";
 		script.async = true;
 
 		document.body.appendChild(script);
@@ -334,7 +328,7 @@ function Cartao({ setTab, usuario }) {
 
 	return (
 		<>
-			<Header numero={3} setTab={setTab} />
+			<Header numero={3} />
 			<Container>
 				<Card>
 					<PaymentCard

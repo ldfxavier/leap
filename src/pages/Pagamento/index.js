@@ -7,6 +7,7 @@ import logo from "~/assets/images/logo.png";
 import Cartao from "./Cartao";
 import Endereco from "./Endereco";
 import Usuario from "./Usuario";
+import Resumo from "./Resumo";
 
 import { Container, ButtonBack } from "./styles";
 
@@ -35,11 +36,20 @@ const Login = () => {
 					usuario={usuario}
 				/>
 			)}
-			{tab === 3 && <Cartao setTab={setTab} usuario={usuario} />}
+			{tab === 3 && (
+				<Cartao
+					setTab={setTab}
+					setUsuario={setUsuario}
+					usuario={usuario}
+				/>
+			)}
+			{tab === 4 && <Resumo setTab={setTab} usuario={usuario} />}
 
-			<Link to="/">
-				<ButtonBack>Cancelar</ButtonBack>
-			</Link>
+			{tab !== 4 && (
+				<Link to="/">
+					<ButtonBack>Cancelar</ButtonBack>
+				</Link>
+			)}
 		</Container>
 	);
 };
