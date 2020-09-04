@@ -28,17 +28,17 @@ function Cartao({ setTab, setUsuario, usuario }) {
 	 */
 
 	const [flipped, setFlipped] = useState(false);
-	// const [cvv, setCvv] = useState("");
-	// const [expiry, setExpiry] = useState("");
-	// const [name, setName] = useState("");
-	// const [cardNumber, setCardNumber] = useState("");
+	const [cvv, setCvv] = useState("");
+	const [expiry, setExpiry] = useState("");
+	const [name, setName] = useState("");
+	const [cardNumber, setCardNumber] = useState("");
 	const [brand, setBrand] = useState();
 
 	//dados de teste
-	const [cvv, setCvv] = useState("989");
-	const [expiry, setExpiry] = useState("04/2021");
-	const [name, setName] = useState("Lucas F Xavier");
-	const [cardNumber, setCardNumber] = useState("5467 1270 8429 4277");
+	// const [cvv, setCvv] = useState("989");
+	// const [expiry, setExpiry] = useState("04/2021");
+	// const [name, setName] = useState("Lucas F Xavier");
+	// const [cardNumber, setCardNumber] = useState("5467 1270 8429 4277");
 
 	/**
 	 * Parcelas
