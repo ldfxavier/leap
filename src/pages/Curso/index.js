@@ -24,10 +24,11 @@ const Curso = (props) => {
 
 	const [index, setIndex] = useState(0);
 	const [aulas, setAulas] = useState(0);
+	const [curso, setCurso] = useState(0);
 
 	const [loading, setLoading] = useState(false);
 
-	const curso = async () => {
+	const getCurso = async () => {
 		const usuario = JSON.parse(localStorage.getItem("@Usuario"));
 		setLoading(true);
 
@@ -38,6 +39,7 @@ const Curso = (props) => {
 				},
 			})
 			.then((response) => {
+				setCurso(response.data);
 				setAulas(response.data.aulas);
 			})
 			.catch((error) => {})
@@ -45,7 +47,7 @@ const Curso = (props) => {
 	};
 
 	useEffect(() => {
-		curso();
+		getCurso();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -74,7 +76,8 @@ const Curso = (props) => {
 		if (aulas.length > 0) {
 			return (
 				<Container>
-					<h1>Modelagem de personagem</h1>
+					<h1>{curso.titulo}</h1>
+					<h2>{aulas[index].titulo}</h2>
 					<Video>
 						<VideoContainer>
 							<iframe

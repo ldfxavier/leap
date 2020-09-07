@@ -17,9 +17,13 @@ export const Container = styled.div`
 	}
 
 	h1 {
-		font-size: 20px;
+		font-size: 2em;
 		color: ${colors.secundary};
 		margin-bottom: 20px;
+	}
+
+	h2 {
+		font-size: 1.5em;
 	}
 `;
 
