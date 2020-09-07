@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 
 import api from "~/services/api";
 
@@ -32,8 +31,6 @@ const responsive = {
 };
 
 const Cursos = () => {
-	const { push } = useHistory();
-
 	const [deviceType] = useState("web");
 
 	const usuario = JSON.parse(localStorage.getItem("@Usuario"));
@@ -55,12 +52,7 @@ const Cursos = () => {
 			.then((response) => {
 				setCategorias(response?.data);
 			})
-			.catch((error) => {
-				if (error.response?.data?.error === "token") {
-					push("/login");
-				}
-				console.log(error.response);
-			})
+			.catch((error) => {})
 			.finally((response) => setLoading(false));
 	}
 
@@ -79,12 +71,7 @@ const Cursos = () => {
 			.then((response) => {
 				setResultadoBusca(response?.data);
 			})
-			.catch((error) => {
-				if (error.response?.data?.error === "token") {
-					push("/login");
-				}
-				setResultadoBusca(false);
-			});
+			.catch((error) => {});
 	}
 
 	const renderCategorias = () => {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 
 import {
 	Container,
@@ -34,7 +33,6 @@ import Loading from "~/components/Loading";
 import InputMask from "react-input-mask";
 
 function Perfil() {
-	const { push } = useHistory();
 	const usuario = JSON.parse(localStorage.getItem("@Usuario"));
 
 	const [errorVisible, setErrorVisible] = useState(false);
@@ -129,9 +127,6 @@ function Perfil() {
 				setCep(data.cep || "");
 			})
 			.catch((error) => {
-				if (error.response.data.error === "token") {
-					push("/login");
-				}
 				Alert.error(error.response.data.message);
 			})
 			.finally((response) => setLoading(false));
@@ -193,9 +188,6 @@ function Perfil() {
 					Alert.success("Senha atualizada com sucesso!");
 				})
 				.catch((error) => {
-					if (error.response.data.error === "token") {
-						push("/login");
-					}
 					Alert.error(error.response.data.message);
 				});
 		}
@@ -222,9 +214,6 @@ function Perfil() {
 					Alert.success("Dados atualizado com sucesso!");
 				})
 				.catch((error) => {
-					if (error.response.data.error === "token") {
-						push("/login");
-					}
 					Alert.error(error.response.data.message);
 				});
 		}
@@ -275,11 +264,6 @@ function Perfil() {
 					Alert.success("Endereço atualizado com sucesso!");
 				})
 				.catch((error) => {
-					if (error.response.data.error === "token") {
-						Alert.error(
-							"Verifique todos os dados e tente novamente"
-						);
-					}
 					Alert.error(error.response.data.message);
 				});
 		}

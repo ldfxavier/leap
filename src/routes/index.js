@@ -28,7 +28,7 @@ const Routes = () => {
 				exact
 				component={Curso}
 			/>
-			<Route path="/semAcesso" isPrivate exact component={SemAcesso} />
+			<Route path="/planos" isPrivate exact component={SemAcesso} />
 		</Switch>
 	);
 };

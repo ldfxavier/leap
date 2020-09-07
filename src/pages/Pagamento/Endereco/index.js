@@ -165,11 +165,6 @@ function Endereco({ setTab, setUsuario, usuario }) {
 					setTab(3);
 				})
 				.catch((error) => {
-					if (error.response.data.error === "token") {
-						Alert.error(
-							"Verifique todos os dados e tente novamente"
-						);
-					}
 					Alert.error(error.response.data.message);
 				});
 		}

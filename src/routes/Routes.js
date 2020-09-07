@@ -18,7 +18,7 @@ function Routes(props) {
 			}
 
 			if (usuario?.dados?.status === 2 && props.isBlock) {
-				push("semAcesso");
+				push("planos");
 			}
 		}
 	}, [pathname, props, push]);

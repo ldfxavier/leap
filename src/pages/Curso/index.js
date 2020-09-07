@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 
 import api from "~/services/api";
 
@@ -21,8 +20,6 @@ import {
 import { Header } from "~/components";
 
 const Curso = (props) => {
-	const { push } = useHistory();
-
 	const { params } = useRouteMatch();
 
 	const [index, setIndex] = useState(0);
@@ -43,12 +40,7 @@ const Curso = (props) => {
 			.then((response) => {
 				setAulas(response.data.aulas);
 			})
-			.catch((error) => {
-				if (error?.response?.data?.error === "token") {
-					push("/login");
-				}
-				console.log(error.response);
-			})
+			.catch((error) => {})
 			.finally((response) => setLoading(false));
 	};
 

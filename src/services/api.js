@@ -13,8 +13,11 @@ api.interceptors.response.use(
 		return response;
 	},
 	(error) => {
-		if (error?.response?.data?.error === "token") {
-			window.location.assign("http://leap.art.br");
+		if (error?.response?.data?.error === 5401) {
+			localStorage.clear();
+			window.location.assign("http://localhost:3000");
+		} else if (error?.response?.data?.error === 5402) {
+			window.location.assign("http://localhost:3000/planos");
 		}
 		return Promise.reject(error);
 	}
