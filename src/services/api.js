@@ -15,9 +15,9 @@ api.interceptors.response.use(
 	(error) => {
 		if (error?.response?.data?.error === 5401) {
 			localStorage.clear();
-			window.location.assign("http://localhost:3000");
+			window.location.assign("https://api.leap.art.br");
 		} else if (error?.response?.data?.error === 5402) {
-			window.location.assign("http://localhost:3000/planos");
+			window.location.assign("https://api.leap.art.br/planos");
 		}
 		return Promise.reject(error);
 	}
