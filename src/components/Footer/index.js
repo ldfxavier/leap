@@ -14,7 +14,7 @@ const Footer = () => {
 					<IconTexto icon="envelope" size="lg" />
 				</a>
 				<a
-					href="https://www.facebook.com/LeapSchoolarte"
+					href="https://www.facebook.com/Leap-School-102132994978824"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
@@ -22,7 +22,7 @@ const Footer = () => {
 				</a>
 
 				<a
-					href="https://www.instagram.com/leap.school/"
+					href="https://www.instagram.com/school.leap/"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
