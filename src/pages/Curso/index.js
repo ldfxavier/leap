@@ -55,18 +55,17 @@ const Curso = (props) => {
 		if (aulas.length > 0) {
 			return aulas.map((item, i) => {
 				return (
-					<>
-						<TimeLineVideo.Item
-							dot={<Bol active={i <= index ? true : false} />}
+					<TimeLineVideo.Item
+					key={i}
+						dot={<Bol active={i <= index ? true : false} />}
+					>
+						<Topico
+							onClick={() => setIndex(i)}
+							active={index === i ? true : false}
 						>
-							<Topico
-								onClick={() => setIndex(i)}
-								active={index === i ? true : false}
-							>
-								{item.titulo}
-							</Topico>
-						</TimeLineVideo.Item>
-					</>
+							{item.titulo}
+						</Topico>
+					</TimeLineVideo.Item>
 				);
 			});
 		}
@@ -83,17 +82,18 @@ const Curso = (props) => {
 							<iframe
 								title={`Aula ${index + 1}`}
 								src={aulas[index].video}
-								frameborder="0"
 								allow="autoplay; fullscreen"
-								allowfullscreen
 							></iframe>
 						</VideoContainer>
 						<TimeLineVideo>{renderTimeLine()}</TimeLineVideo>
 					</Video>
-					<Descricao>
-						<h1>Descrição</h1>
-						{parse(aulas[index].conteudo)}
-					</Descricao>
+					{aulas[index].conteudo !==  null && (
+						<Descricao>
+							<h1>Descrição</h1>
+							{parse(aulas[index].conteudo)}
+						</Descricao>
+					)}
+					
 				</Container>
 			);
 		}
